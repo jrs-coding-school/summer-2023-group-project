@@ -1,6 +1,6 @@
+import { getToken } from "./utils"
 //The base url of the API, can be changed in the .env file
 const baseUrl = process.env.REACT_APP_API_URL || 'http://localhost:9000'
-import { getToken } from "./utils"
 
 /**
  * Sends a login request to the api for a user with the provided username and password.
