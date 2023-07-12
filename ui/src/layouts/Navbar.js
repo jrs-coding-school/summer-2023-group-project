@@ -13,8 +13,8 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { Link } from 'react-router-dom';
 
-// function Navbar (props)
 const pages = ['Report A Crime', 'Leaderboard', 'Profile'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -42,23 +42,25 @@ function Navbar() {
 				<Container maxWidth='xl'>
 					<Toolbar disableGutters>
 						{/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
-						<Typography
-							variant='h6'
-							noWrap
-							component='a'
-							href='/'
-							sx={{
-								mr: 2,
-								display: { xs: 'none', md: 'flex' },
-								fontFamily: 'monospace',
-								fontWeight: 700,
-								letterSpacing: '.3rem',
-								color: 'inherit',
-								textDecoration: 'none',
-							}}
-						>
-							iWitness
-						</Typography>
+						<Link to='/Home' style={{ textDecoration: 'none', color: 'white' }}>
+							<Typography
+								variant='h6'
+								noWrap
+								component='a'
+								href='/'
+								sx={{
+									mr: 2,
+									display: { xs: 'none', md: 'flex' },
+									fontFamily: 'monospace',
+									fontWeight: 700,
+									letterSpacing: '.3rem',
+									color: 'inherit',
+									textDecoration: 'none',
+								}}
+							>
+								iWitness
+							</Typography>
+						</Link>
 
 						<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
 							<IconButton
