@@ -1,7 +1,6 @@
 import { Grid } from "@mui/material";
 import { register } from "../../utility/api";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
+import { setToken } from "../../utility/utils";
 import { useState } from "react";
 
 function Register(props) {
@@ -22,7 +21,16 @@ function Register(props) {
     // prevents the submit button from refreshing the page
     event.preventDefault();
     try {
-      await register(userData);
+      //check all fields filled
+      //check email is valid using regex
+      //check password meets requirments
+      //check username and email have not been used
+      //if already used tell user
+      const token = await register(userData);
+      //submit users token to jwt utility 
+      setToken(token);
+      //redirect user to success page
+      
     } catch (error) {
       console.log(error);
     }
