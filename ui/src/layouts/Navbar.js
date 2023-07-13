@@ -12,12 +12,11 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Link } from 'react-router-dom';
-import Grid from '@mui/material/Grid';
 
+//settings for the profile dropdown
 const settings = ['Profile', 'Account', 'Logout'];
 
 function Navbar() {
@@ -43,7 +42,8 @@ function Navbar() {
 			<AppBar position='static'>
 				<Container maxWidth='xl'>
 					<Toolbar disableGutters>
-						<Link to='/Home' style={{ textDecoration: 'none', color: 'white' }}>
+						{/* linked the iWitness text to the homepage */}
+						<Link to='/home' style={{ textDecoration: 'none', color: 'white' }}>
 							<Typography
 								variant='h6'
 								noWrap
@@ -122,29 +122,33 @@ function Navbar() {
 								color: 'white',
 							}}
 						>
-							<Link
-								to='/leaderboard'
-								sx={{ textDecoration: 'none', color: 'white' }}
-							>
+							{/* linked the leaderboard trophy icon to /leaderboard */}
+							<Link to='/leaderboard'>
 								<EmojiEventsIcon
 									sx={{
 										display: { xs: 'none', md: 'flex' },
 										mr: 1,
+										textDecoration: 'none',
+										color: 'white',
 									}}
 								/>
 							</Link>
-							<Link
-								to='/notfications'
-								sx={{ textDecoration: 'none', color: 'white' }}
-							>
+							{/* link the notification bell icon to /notifications */}
+							<Link to='/notfications'>
 								<NotificationsIcon
-									sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}
+									sx={{
+										display: { xs: 'none', md: 'flex' },
+										mr: 1,
+										textDecoration: 'none',
+										color: 'white',
+									}}
 								/>
 							</Link>
 						</Box>
 
 						<Box sx={{ flexGrow: 0 }}>
 							<Tooltip title='Open settings'>
+								{/* profile avatar on far right side */}
 								<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
 									<Avatar alt='Profile' />
 								</IconButton>
