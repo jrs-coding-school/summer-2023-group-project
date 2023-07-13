@@ -21,13 +21,14 @@ function Register(props) {
   const handleSubmit = async (event) => {
     // prevents the submit button from refreshing the page
     event.preventDefault();
-    try {
-      //check all fields filled
+    //check all fields filled
       //check email is valid using regex
       //check password meets requirments
       //check both passwords match
       //check username and email have not been used
       //if already used tell user
+    try {
+      
       const token = await register(userData);
       //submit users token to jwt utility 
       setToken(token);
