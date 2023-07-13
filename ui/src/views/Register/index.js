@@ -4,7 +4,6 @@ import { setToken } from "../../utility/utils";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 function Register(props) {
   const [userData, setUserdata] = useState({
     username: "",
@@ -34,10 +33,12 @@ function Register(props) {
       setToken(token);
       //redirect user to success page
           // 👇 Redirects to about page, note the `replace: true`
-      navigate('/register/success', { replace: true });
+      
     } catch (error) {
       console.log(error);
     }
+    //if api post works, redirect to success page
+    navigate('/register/success', {replace: true});
   };
 
   return (

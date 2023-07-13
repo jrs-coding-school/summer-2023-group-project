@@ -5,7 +5,7 @@ import NotFound from './views/NotFound'
 import Layout from './layouts'
 import ThemeContextProvider from './context/themeContext'
 import Register from './views/Register'
-import Success from './views/Register'
+import Success from './views/Register/success'
 
 function App() {
   return (
