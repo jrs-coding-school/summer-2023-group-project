@@ -5,6 +5,7 @@ import NotFound from './views/NotFound'
 import Layout from './layouts'
 import ThemeContextProvider from './context/themeContext'
 import Register from './views/Register'
+import Login from './views/Login'
 import Success from './views/Register/success'
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
             <Route path="/about" element={<About/>}/>
             <Route path="/register" element={<Register/>}/>
             <Route path="/register/success" element={<Success/>}/>
+            <Route path="/login" element={<Login/>}/>
             <Route path="*" element={<NotFound/>}/>
           </Route>
         </Routes>
