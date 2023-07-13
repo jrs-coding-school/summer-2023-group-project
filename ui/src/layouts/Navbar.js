@@ -73,7 +73,11 @@ function Navbar() {
 								onClick={handleOpenNavMenu}
 								color='inherit'
 							>
-								<MenuIcon />
+								
+								<MenuIcon>
+									
+								</MenuIcon>
+								
 							</IconButton>
 							<Menu
 								id='menu-appbar'
@@ -123,6 +127,12 @@ function Navbar() {
 								color: 'white',
 							}}
 						>
+							<Link to='/report' style={{ textDecoration: 'none' }}><Button sx={{
+										display: { xs: 'none', md: 'flex' },
+										mr: 1,
+										textDecoration: 'none',
+										color: 'white',
+									}}>Report a Crime</Button></Link>
 							{/* linked the leaderboard trophy icon to /leaderboard */}
 							<Link to='/leaderboard'>
 								<EmojiEventsIcon
