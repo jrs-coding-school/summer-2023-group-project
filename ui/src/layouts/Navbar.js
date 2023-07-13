@@ -20,7 +20,10 @@ import {getToken, isUserLoggedIn, setToken, clearToken} from '../utility/utils'
 
 //settings for the profile dropdown
 const settings = ['Profile', 'Account', 'Logout'];
-
+function Logout() {
+	clearToken();
+	window.location.reload(false);
+}
 function Navbar() {
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
 	const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -202,7 +205,7 @@ function Navbar() {
 							>
 								<MenuItem><Link to='/profile' style={{ textDecoration: 'none'}}>Profile</Link></MenuItem>
 								<MenuItem><Link to='/account' style={{ textDecoration: 'none' }}>Account</Link></MenuItem>
-								<MenuItem><Link to='/logout' style={{ textDecoration: 'none' }} >Logout</Link></MenuItem>
+								<MenuItem onClick={() => Logout()}><Link to='/home' style={{ textDecoration: 'none' }}>Logout</Link></MenuItem>
 							</Menu>
 						</Box>
 					</Toolbar>
