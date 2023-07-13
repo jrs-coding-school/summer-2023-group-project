@@ -12,6 +12,7 @@ function Register(props) {
     zipcode: "",
     password: "",
   });
+  const [passwordReenter, setPasswordReenter] = useState()
 
   const handleChange = (event) => {
     setUserdata({ ...userData, [event.target.name]: event.target.value });
@@ -119,7 +120,7 @@ function Register(props) {
           <input
             type="password"
             name="password"
-            value={userData.password}
+            value={passwordReenter}
             onChange={handleChange}
           />
         </label>
