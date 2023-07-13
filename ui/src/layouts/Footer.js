@@ -1,62 +1,7 @@
-// import { Box, Paper } from '@mui/material';
-// import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
-
-// function Footer(props) {
-// 	return (
-// 		<Box
-// 			sx={{
-// 				display: 'flex',
-// 				flexDirection: 'column',
-// 				minHeight: '100vh',
-// 				borderTop: '1px solid #000',
-// 				marginTop: 'auto',
-// 				p: 4,
-// 			}}
-// 		>
-// 			<Typography variant='h6'>Created By:</Typography>
-// 			<Typography>
-// 				<Link to='https://www.linkedin.com/in/jackson-abeyta-960243281/'>
-// 					Jackson Abeyta
-// 				</Link>
-// 			</Typography>
-
-// 			<Typography>
-// 				<Link to='https://www.linkedin.com/in/morgan-bastian-a6a715181/'>
-// 					Morgan Bastian
-// 				</Link>
-// 			</Typography>
-
-// 			<Typography>
-// 				<Link to='https://www.linkedin.com/in/tina-funderburk-5440b2255/'>
-// 					Tina Funderburk
-// 				</Link>
-// 			</Typography>
-
-// 			<Typography>
-// 				<Link to='https://www.linkedin.com/in/mckain-badger-131044237/'>
-// 					McKain Badger
-// 				</Link>
-// 			</Typography>
-
-// 			<Typography>
-// 				<Link to='https://www.linkedin.com/in/colt-andrews-717bb11a6/'>
-// 					Colt Andrews
-// 				</Link>
-// 			</Typography>
-
-// 			<Typography>
-// 				<Link to='https://www.linkedin.com/in/william-godfrey-492568278/'>
-// 					William Godfrey
-// 				</Link>
-// 			</Typography>
-// 		</Box>
-// 	);
-// }
-
 import React from 'react';
 import { Box, Container, Grid, Typography } from '@mui/material';
-
+//still need to figure out how to get the footer to the bottom of the page
 function Footer(props) {
 	return (
 		<Box
@@ -64,7 +9,6 @@ function Footer(props) {
 				position: 'fixed',
 				width: '100%',
 				height: 'auto',
-				// backgroundColor: 'secondary.main',
 				paddingTop: '1rem',
 				paddingBottom: '1rem',
 			}}
