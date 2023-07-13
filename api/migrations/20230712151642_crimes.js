@@ -7,7 +7,7 @@ exports.up = function(knex) {
   return knex.schema.createTable('crimes', function(table) {
     table.increments('id').primary();
     table.string('type', 50).notNullable();
-    table.string('subtype', 50).notNullable();
+    table.string('subtype').notNullable();
     table.integer('points').notNullable();
   })
 };

@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "type": "robbery",
+    "subtype": {
+      "1": "armed robbery",
+      "2": "aggravated robbery",
+      "3": "breaking and entering"
+    },
+    "points": 2
+    
+  },
+  {
+    "id": 2,
+    "type": "assault",
+    "subtype": {
+      "1": "aggravted assault",
+      "2": "assault with a deadly weapon"
+    }
+    ,
+    "points": 4
+  },
+  {
+    "id": 3,
+    "type": "murder",
+    "subtype": {
+      "1": "shooting",
+      "2": "stabbing"
+    }
+    ,
+    "points": 6
+  },
+  {
+    "id": 4,
+    "type": "theft",
+    "subtype": {
+      "1": "shoplifting",
+      "2": "personal theft",
+      "3": "auto theft"
+    }
+    ,
+    "points": 1
+  }
+]
