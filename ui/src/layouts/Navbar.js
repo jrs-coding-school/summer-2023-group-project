@@ -65,7 +65,27 @@ function Navbar() {
 						</Link>
 
 						<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-							<IconButton
+						<Link to='/leaderboard'>
+								<EmojiEventsIcon
+									sx={{
+										// display: { xs: 'none', md: 'flex' },
+										mr: 1,
+										textDecoration: 'none',
+										color: 'white',
+									}}
+								/>
+							</Link>
+							<Link to='/notfications'>
+								<NotificationsIcon
+									sx={{
+										// display: { xs: 'none', md: 'flex' },
+										mr: 1,
+										textDecoration: 'none',
+										color: 'white',
+									}}
+								/>
+							</Link>
+							{/* <IconButton
 								size='large'
 								aria-label='account of current user'
 								aria-controls='menu-appbar'
@@ -73,12 +93,11 @@ function Navbar() {
 								onClick={handleOpenNavMenu}
 								color='inherit'
 							>
-								
+								<EmojiEventsIcon/>
 								<MenuIcon>
-									
 								</MenuIcon>
 								
-							</IconButton>
+							</IconButton> */}
 							<Menu
 								id='menu-appbar'
 								anchorEl={anchorElNav}
