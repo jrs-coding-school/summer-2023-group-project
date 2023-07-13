@@ -2,43 +2,61 @@
   {
     "id": 1,
     "type": "robbery",
-    "subtype": {
-      "1": "armed robbery",
-      "2": "aggravated robbery",
-      "3": "breaking and entering"
-    },
+    "subtype": "armed robbery",
     "points": 2
-    
   },
   {
     "id": 2,
-    "type": "assault",
-    "subtype": {
-      "1": "aggravted assault",
-      "2": "assault with a deadly weapon"
-    }
-    ,
-    "points": 4
+    "type": "robbery",
+    "subtype": "aggravted robbery",
+    "points": 2
   },
   {
     "id": 3,
-    "type": "murder",
-    "subtype": {
-      "1": "shooting",
-      "2": "stabbing"
-    }
-    ,
-    "points": 6
+    "type": "robbery",
+    "subtype": "breaking and entereing",
+    "points": 2
   },
   {
     "id": 4,
+    "type": "assault",
+    "subtype": "aggravted assault",
+    "points": 4
+  },
+  {
+    "id": 5,
+    "type": "assault",
+    "subtype": "assault with a deadly weapon",
+    "points": 4
+  },
+  {
+    "id": 6,
+    "type": "murder",
+    "subtype": "shooting",
+    "points": 6
+  },
+  {
+    "id": 7,
+    "type": "murder",
+    "subtype": "stabbing",
+    "points": 6
+  },
+  {
+    "id": 8,
     "type": "theft",
-    "subtype": {
-      "1": "shoplifting",
-      "2": "personal theft",
-      "3": "auto theft"
-    }
-    ,
+    "subtype": "shoplifting",
+    "points": 1
+  },
+  {
+    "id": 9,
+    "type": "theft",
+    "subtype": "personal theft",
+    "points": 1
+  },
+  {
+    "id": 10,
+    "type": "theft",
+    "subtype": "auto theft",
     "points": 1
   }
 ]
