@@ -24,13 +24,14 @@ function Register(props) {
       //check all fields filled
       //check email is valid using regex
       //check password meets requirments
+      //check both passwords match
       //check username and email have not been used
       //if already used tell user
       const token = await register(userData);
       //submit users token to jwt utility 
       setToken(token);
       //redirect user to success page
-      
+
     } catch (error) {
       console.log(error);
     }
@@ -97,6 +98,17 @@ function Register(props) {
             type="text"
             name="zipcode"
             value={userData.zipcode}
+            onChange={handleChange}
+          />
+        </label>
+        </Grid>
+        <Grid item xs={8}>
+        <label>
+          Password:
+          <input
+            type="password"
+            name="password"
+            value={userData.password}
             onChange={handleChange}
           />
         </label>
