@@ -15,6 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Link } from 'react-router-dom';
+import { blue } from '@mui/material/colors';
 
 //settings for the profile dropdown
 const settings = ['Profile', 'Account', 'Logout'];
@@ -154,7 +155,7 @@ function Navbar() {
 								</IconButton>
 							</Tooltip>
 							<Menu
-								sx={{ mt: '45px' }}
+								sx={{ mt: '45px',}}
 								id='menu-appbar'
 								anchorEl={anchorElUser}
 								anchorOrigin={{
@@ -169,11 +170,9 @@ function Navbar() {
 								open={Boolean(anchorElUser)}
 								onClose={handleCloseUserMenu}
 							>
-								{settings.map((setting) => (
-									<MenuItem key={setting} onClick={handleCloseUserMenu}>
-										<Typography textAlign='center'>{setting}</Typography>
-									</MenuItem>
-								))}
+								<MenuItem><Link to='/profile' style={{ textDecoration: 'none'}}>Profile</Link></MenuItem>
+								<MenuItem><Link to='/account' style={{ textDecoration: 'none' }}>Account</Link></MenuItem>
+								<MenuItem><Link to='/logout' style={{ textDecoration: 'none' }} >Logout</Link></MenuItem>
 							</Menu>
 						</Box>
 					</Toolbar>
