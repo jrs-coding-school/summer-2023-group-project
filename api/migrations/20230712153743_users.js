@@ -12,9 +12,9 @@ exports.up = function(knex) {
     table.string('firstname', 50).notNullable();
     table.string('lastname', 50).notNullable();
     table.string('zipcode', 10).notNullable();
-    table.string('bio', 255).notNullable();
-    table.string('avatar', 255).notNullable();
-    table.integer('points').notNullable().defaultTo(0);
+    table.string('bio', 255)
+    table.string('avatar', 255)
+    table.integer('points').defaultTo(0);
     table.enu("role", ["admin", "user"]).nullable().defaultTo("user")
     table.timestamp('createdAt').defaultTo(knex.fn.now())
   })
