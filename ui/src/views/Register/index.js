@@ -13,55 +13,72 @@ function Register(props) {
     zipcode: "",
     password: "",
   });
+  const [validationErrorArray, setValidationErrorArray] = useState([]);
   const navigate = useNavigate();
+
   const handleChange = (event) => {
     setUserdata({ ...userData, [event.target.name]: event.target.value });
+  };
+
+  const validateInput = () => {
+    //check email is valid using regex
+    const validationArray = []
+    const validEmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (userData.username.length < 3) {
+      const errorMsg = "Please enter a username with more than 3 characters";
+      validationArray.push(errorMsg)
+    }
+    //check if a fist name is inputted
+     if (userData.firstname.length === 0) {
+      const errorMsg = "Please enter firstname";
+      validationArray.push(errorMsg)
+    }
+    // check if last name is inputted
+     if (userData.lastname.length === 0) {
+      const errorMsg = "Please enter lastname";
+      validationArray.push(errorMsg)
+    }
+    //check if zipcode is valid
+     if (userData.zipcode.length < 5) {
+      const errorMsg = "Please enter valid zipcode";
+      validationArray.push(errorMsg)
+    }
+    //check password meets requirments
+     if (userData.password.length === 0) {
+      const errorMsg = "Password must contain at least 8 Characters";
+      validationArray.push(errorMsg)
+    }
+    //check email is valid using regex
+    if (!userData.email.match(validEmailRegex)) {
+      const errorMsg = "Please enter valid email";
+      validationArray.push(errorMsg)
+    } 
+    if(validationArray.length > 0){
+      setValidationErrorArray(validationArray)
+      return false
+    } else {
+      return true
+    }
   };
 
   const handleSubmit = async (event) => {
     // prevents the submit button from refreshing the page
     event.preventDefault();
-    //check all fields filled
-    //check email is valid using regex
-    //check password meets requirments
-    //check both passwords match
-    //check username and email have not been used
-    //if already used tell user
-    if ((userData.username.length = 0 || userData.username.length < 3)) {
-      console.log("Please enter a username with more than 3 characters");
+    setValidationErrorArray([]);
+    let validatedInput = validateInput();
+    if (validatedInput === true) {
+      try {
+        const response = await register(userData);
+        //submit users token to jwt utility
+        console.log(response.token)
+        setToken(response.token);
+        //redirect user to success page
+      } catch (error) {
+        console.log(error);
+      }
+      //if api post works, redirect to success page
+      navigate("/register/success");
     }
-    if ((userData.firstname.length = 0)) {
-      console.log("Please enter firstname");
-    }
-    if ((userData.lastname.length = 0)) {
-      console.log("Please enter lastname");
-    }
-    if ((userData.email.length = 0)) {
-      console.log("Please enter email");
-    }
-    if (userData.zipcode.length < 5) {
-      console.log("Please enter zipcode");
-    }
-    if ((userData.password.length = 0)) {
-      console.log("Please enter password");
-    }
-    //check email is valid using regex
-
-    //check password meets requirments
-    if ((userData.password.length = 0 || userData.password.length < 8)) {
-      console.log("Password must contain at least 8 Characters");
-    }
-    try {
-      const token = await register(userData);
-      //submit users token to jwt utility
-      setToken(token);
-      //redirect user to success page
-      // 👇 Redirects to about page, note the `replace: true`
-    } catch (error) {
-      console.log(error);
-    }
-    //if api post works, redirect to success page
-    navigate("/register/success", { replace: true });
   };
 
   return (
@@ -144,6 +161,11 @@ function Register(props) {
           </Grid>
           <input type="submit" value="Submit" />
         </form>
+        <Grid item xs={8}>
+          {validationErrorArray.map((e) => {
+            return <div>{e}</div>;
+          })}
+        </Grid>
       </Grid>
     </div>
   );
