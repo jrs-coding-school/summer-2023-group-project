@@ -64,7 +64,7 @@ function Navbar() {
 							</Typography>
 						</Link>
 
-						<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+						<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, alignItems:'center' }}>
 						<Link to='/leaderboard'>
 								<EmojiEventsIcon
 									sx={{
@@ -85,6 +85,12 @@ function Navbar() {
 									}}
 								/>
 							</Link>
+							<Link to='/report' style={{ textDecoration: 'none' }}><Button sx={{
+										// display: { xs: 'none', md: 'flex' },
+										mr: 1,
+										textDecoration: 'none',
+										color: 'white',
+									}}>Report a Crime</Button></Link>
 							{/* <IconButton
 								size='large'
 								aria-label='account of current user'
