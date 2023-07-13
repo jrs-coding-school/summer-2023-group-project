@@ -5,6 +5,7 @@ import NotFound from './views/NotFound'
 import Layout from './layouts'
 import ThemeContextProvider from './context/themeContext'
 import Register from './views/Register'
+import Success from './views/Register'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route index element={<Home/>}/>
             <Route path="/about" element={<About/>}/>
             <Route path="/register" element={<Register/>}/>
+            <Route path="/success" element={<Success/>}/>
             <Route path="*" element={<NotFound/>}/>
           </Route>
         </Routes>

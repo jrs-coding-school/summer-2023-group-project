@@ -122,7 +122,7 @@ function Register(props) {
             type="password"
             name="password"
             value={passwordReenter}
-            onChange={handleChange}
+            onChange={setPasswordReenter}
           />
         </label>
         </Grid>
