@@ -2,6 +2,8 @@ import { Grid } from "@mui/material";
 import { register } from "../../utility/api";
 import { setToken } from "../../utility/utils";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 function Register(props) {
   const [userData, setUserdata] = useState({
@@ -12,8 +14,7 @@ function Register(props) {
     zipcode: "",
     password: "",
   });
-  const [passwordReenter, setPasswordReenter] = useState()
-
+  const navigate = useNavigate();
   const handleChange = (event) => {
     setUserdata({ ...userData, [event.target.name]: event.target.value });
   };
@@ -28,12 +29,12 @@ function Register(props) {
       //check username and email have not been used
       //if already used tell user
     try {
-      
       const token = await register(userData);
       //submit users token to jwt utility 
       setToken(token);
       //redirect user to success page
-
+          // 👇 Redirects to about page, note the `replace: true`
+      navigate('/register/success', { replace: true });
     } catch (error) {
       console.log(error);
     }
@@ -112,17 +113,6 @@ function Register(props) {
             name="password"
             value={userData.password}
             onChange={handleChange}
-          />
-        </label>
-        </Grid>
-        <Grid item xs={8}>
-        <label>
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={passwordReenter}
-            onChange={setPasswordReenter}
           />
         </label>
         </Grid>
