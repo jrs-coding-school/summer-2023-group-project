@@ -16,10 +16,14 @@ import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Link } from 'react-router-dom';
 import { blue } from '@mui/material/colors';
+import {getToken, isUserLoggedIn, setToken, clearToken} from '../utility/utils'
 
 //settings for the profile dropdown
 const settings = ['Profile', 'Account', 'Logout'];
-
+function Logout() {
+	clearToken();
+	window.location.reload(false);
+}
 function Navbar() {
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
 	const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -91,19 +95,7 @@ function Navbar() {
 										textDecoration: 'none',
 										color: 'white',
 									}}>Report a Crime</Button></Link>
-							{/* <IconButton
-								size='large'
-								aria-label='account of current user'
-								aria-controls='menu-appbar'
-								aria-haspopup='true'
-								onClick={handleOpenNavMenu}
-								color='inherit'
-							>
-								<EmojiEventsIcon/>
-								<MenuIcon>
-								</MenuIcon>
-								
-							</IconButton> */}
+							
 							<Menu
 								id='menu-appbar'
 								anchorEl={anchorElNav}
@@ -183,11 +175,17 @@ function Navbar() {
 						</Box>
 
 						<Box sx={{ flexGrow: 0 }}>
-							<Tooltip title='Open settings'>
+							<Tooltip >
 								{/* profile avatar on far right side */}
-								<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+								{isUserLoggedIn() ? <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
 									<Avatar alt='Profile' />
-								</IconButton>
+								</IconButton> :<Link to='/login'><Button sx={{
+										// display: { xs: 'none', md: 'flex' },
+										mr: 1,
+										textDecoration: 'none',
+										color: 'white',
+										flex: 'row-reverse',
+									}}>Login</Button></Link> }
 							</Tooltip>
 							<Menu
 								sx={{ mt: '45px',}}
@@ -207,7 +205,7 @@ function Navbar() {
 							>
 								<MenuItem><Link to='/profile' style={{ textDecoration: 'none'}}>Profile</Link></MenuItem>
 								<MenuItem><Link to='/account' style={{ textDecoration: 'none' }}>Account</Link></MenuItem>
-								<MenuItem><Link to='/logout' style={{ textDecoration: 'none' }} >Logout</Link></MenuItem>
+								<MenuItem onClick={() => Logout()}><Link to='/home' style={{ textDecoration: 'none' }}>Logout</Link></MenuItem>
 							</Menu>
 						</Box>
 					</Toolbar>
