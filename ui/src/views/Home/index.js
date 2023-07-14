@@ -15,6 +15,7 @@ import { useEffect , useState } from 'react'
 function Home(props) {
   const formatting = '. '
   const [data, setData] = useState(null)
+  const [error, setError] = useState(null)
   const { userId } = useParams()
   useEffect(() => {
     fetch(`http://localhost:9000/users/id/1`)
@@ -26,9 +27,13 @@ function Home(props) {
       })
       .then((result) => {
         setData(result)
-    }) // set state when the data received
+    })
+    
+   // set state when the data received
       .catch((err) => err) // return the error
+    
     }, [])
+    
     if (!data) { // guard clause to prevent runtime errors
       return ( 
         <div>
@@ -36,9 +41,23 @@ function Home(props) {
         </div>
         )
     }
-    console.log(data)
+console.log(data)
+console.log(data[0].zipcode)
 
-
+// fetch(`https://geocode.maps.co/search?q=${data[0].zipcode}`)
+//       .then((response) => {
+//         if(!response.ok) {
+//           setError({status: response.status, statusText: response.statusText})
+//         }
+//         console.log(response)
+//         return response.json() // parse the response data
+//       })
+//       .then((result) => {
+//         // console.log(result)
+//           const lat = result[0].lat
+//           const lon = result[0].lon
+//           console.log(result)
+//       }) 
 
   return (
     <Paper>
