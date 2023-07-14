@@ -88,3 +88,17 @@ export const getAllUsers = async(data) => {
 
   return responseData
 }
+  
+export const getReportById = async(id) => {
+
+  const response = await fetch(`${baseUrl}/reports/${id}`, {
+    method: "GET",
+  })
+
+  const responseData = await response.json()
+  if (!response.ok) {
+    throw new Error(`Status Code: ${response?.status} - ${responseData?.message}`)
+  }
+
+  return responseData
+}
