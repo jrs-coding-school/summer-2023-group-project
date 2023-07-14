@@ -66,6 +66,23 @@ export const register = async(data) => {
   return responseData
 }
 
+export const updateUserById = async(data, id) => {
+
+  const response = await fetch(`${baseUrl}/users/update/${id}`, {
+    method: "PUT", 
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(data),
+  })
+
+  const responseData = await response.json()
+
+  if (!response.ok) {
+    throw new Error(`Status Code: ${response?.status} - ${responseData?.message}`)
+  }
+
+  return responseData
+}
+
 export const getAllUsers = async(data) => {
 
   const token = getToken()

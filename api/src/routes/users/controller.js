@@ -3,7 +3,7 @@ require('dotenv').config()
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-const { findById, findAll, createUser, findByUsername } = require('./service')
+const { findById, findAll, createUser, findByUsername, modifyUser } = require('./service')
 
 exports.showAll = async (req, res) => {
   try {
@@ -68,6 +68,25 @@ exports.register = async (req, res) => {
     // Create a JWT and send it back to the client
     const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY)
     return res.json({ token })
+
+  } catch (error) {
+    console.log(error)
+
+    if(error.code === 'ER_DUP_ENTRY') {
+      return res.status(409).json({ message: "Account already exists" })
+    }
+
+    return res.status(500).json({ message: "Internal Server Error" })
+  }
+}
+
+exports.updateUserById = async (req, res) => {
+  try {
+    const userData = req.body
+    const userId = req.params.id
+    await modifyUser(userData, userId)
+    // Create a JWT and send it back to the client
+    return res.json()
 
   } catch (error) {
     console.log(error)
