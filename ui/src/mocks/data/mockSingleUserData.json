@@ -1,0 +1,16 @@
+[
+    {
+      "id": 1,
+      "username": "dmcmoyer0",
+      "email": "dmcmoyer0@icq.com",
+      "password": "$2a$04$u1mfIRBkyXPwXlvCT.mlo.2HeRIAmeSC3TamtH86KFP1jrxFVdW1G",
+      "firstname": "Daron",
+      "lastname": "McMoyer",
+      "zipcode": 29402,
+      "bio": "This is a bio.",
+      "avatar": "SedTristique.png",
+      "points": 0,
+      "role": "user",
+      "createdAt": "12/5/2022"
+    }
+]
