@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { register } from "../../utility/api";
 import { setToken } from "../../utility/utils";
 import { useState } from "react";
@@ -163,7 +163,7 @@ function Register(props) {
         </form>
         <Grid item xs={8}>
           {validationErrorArray.map((e) => {
-            return <div>{e}</div>;
+            return <Typography color={"red"}>{e}</Typography>;
           })}
         </Grid>
       </Grid>
