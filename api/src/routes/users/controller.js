@@ -84,17 +84,15 @@ exports.updateUserById = async (req, res) => {
   try {
     const userData = req.body
     const userId = req.params.id
+    console.log(userData)
     await modifyUser(userData, userId)
     // Create a JWT and send it back to the client
     return res.json()
-
   } catch (error) {
     console.log(error)
-
     if(error.code === 'ER_DUP_ENTRY') {
       return res.status(409).json({ message: "Account already exists" })
     }
-
     return res.status(500).json({ message: "Internal Server Error" })
   }
 }

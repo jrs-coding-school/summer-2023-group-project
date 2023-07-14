@@ -49,6 +49,7 @@ exports.createUser = async (userData) => {
 
 exports.modifyUser = async (userData, id) => {
   // Insert the user into the database and return
+  console.log(userData)
   return await knex('users').update(userData).where('id', id) // return the data you need excluding the password
 }
 
