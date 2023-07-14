@@ -204,7 +204,7 @@ function Navbar() {
 								onClose={handleCloseUserMenu}
 							>
 								<MenuItem><Link to='/profile' style={{ textDecoration: 'none'}}>Profile</Link></MenuItem>
-								<MenuItem><Link to='/account' style={{ textDecoration: 'none' }}>Account</Link></MenuItem>
+								<MenuItem><Link to='/account/settings' style={{ textDecoration: 'none' }}>Account</Link></MenuItem>
 								<MenuItem onClick={() => Logout()}><Link to='/home' style={{ textDecoration: 'none' }}>Logout</Link></MenuItem>
 							</Menu>
 						</Box>

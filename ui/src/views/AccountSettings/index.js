@@ -1,6 +1,6 @@
 import { Grid, Typography } from "@mui/material";
 import { updateUserById, deleteUserById } from "../../utility/api";
-import { getToken } from "../../utility/utils";
+import { getToken, clearToken } from "../../utility/utils";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -15,6 +15,7 @@ function AccountSettings(props) {
     password: "",
   });
   const [validationErrorArray, setValidationErrorArray] = useState([]);
+
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -26,23 +27,23 @@ function AccountSettings(props) {
     const validationArray = [];
     const validEmailRegex =
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    if (userData.username.length > 0 || userData.username.length < 3) {
+    if (userData.username.length > 0 && userData.username.length < 3) {
       const errorMsg = "Please enter a username with more than 3 characters";
       validationArray.push(errorMsg);
     }
 
     //check if zipcode is valid
-    if (userData.zipcode.length > 0 || userData.zipcode.length < 5) {
+    if (userData.zipcode.length > 0 && userData.zipcode.length < 5) {
       const errorMsg = "Please enter valid zipcode";
       validationArray.push(errorMsg);
     }
     //check password meets requirments
-    if (userData.password.length > 0 || userData.password.length < 8) {
+    if (userData.password.length > 0 && userData.password.length < 8) {
       const errorMsg = "Password must contain at least 8 Characters";
       validationArray.push(errorMsg);
     }
     //check email is valid using regex
-    if (!userData.email.match(validEmailRegex)) {
+    if (userData.email > 0 && !userData.email.match(validEmailRegex)) {
       const errorMsg = "Please enter valid email";
       validationArray.push(errorMsg);
     }
@@ -72,14 +73,18 @@ function AccountSettings(props) {
 
   const deleteAccount = async (event) => {
     try {
-      const token = parseJwt(getToken());
-      const id = token.id;
+      const token = getToken()
+      const parsedToken = parseJwt(token);
+      const id = parsedToken.id;
       const response = await deleteUserById(id);
+      clearToken(token)
+      navigate('/')
       console.log(response)
     } catch (error) {
       console.log(error);
     }
   };
+
 
   const handleSubmit = async (event) => {
     // prevents the submit button from refreshing the page
