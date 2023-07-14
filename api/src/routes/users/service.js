@@ -43,7 +43,7 @@ exports.createUser = async (userData) => {
   return await knex('users').insert({
     ...userData,
     username: username,
-    passwordHash: hash //store the hash. DO NOT store a plaintext password!
+    password: hash //store the hash. DO NOT store a plaintext password!
   }).returning(['id', 'username', 'role']) // return the data you need excluding the password
 }
 

@@ -50,6 +50,7 @@ export const login = async (data) => {
  */
 export const register = async(data) => {
 
+  console.log(data)
   const response = await fetch(`${baseUrl}/users/register`, {
     method: "POST", 
     headers: {'Content-Type': 'application/json'},

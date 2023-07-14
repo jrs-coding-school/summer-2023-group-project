@@ -3,7 +3,7 @@ require('dotenv').config()
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-const { findById, findAll, create, findByUsername } = require('./service')
+const { findById, findAll, createUser, findByUsername } = require('./service')
 
 exports.showAll = async (req, res) => {
   try {
@@ -63,8 +63,7 @@ exports.showById = async (req, res) => {
 exports.register = async (req, res) => {
   try {
     const userData = req.body
-
-    const user = await create(userData)
+    const user = await createUser(userData)
     
     // Create a JWT and send it back to the client
     const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY)
