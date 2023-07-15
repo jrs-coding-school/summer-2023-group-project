@@ -1,10 +1,7 @@
 import { Paper } from "@mui/material";
 import { Map, Marker } from "pigeon-maps";
 import {
-  getToken,
   isUserLoggedIn,
-  setToken,
-  clearToken,
 } from "../../utility/utils";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
@@ -61,9 +58,16 @@ fetch(`https://geocode.maps.co/search?postalcode=${data[0].zipcode}`)
       }) 
       console.log(lat,long)
 
+      if (!lat && !long) { // guard clause to prevent runtime errors
+        return ( 
+          <div>
+            <div>Loading...</div>
+          </div>
+          )
+      }
   return (
     <Paper>
-      {isUserLoggedIn() ? (
+      {isUserLoggedIn() && lat !== null && long !==null ? (
         <Map height={600} defaultCenter={[32.7765, -79.9311]} defaultZoom={13}>
           <Marker width={50} anchor={[32.7765, -79.9311]} />
         </Map>
