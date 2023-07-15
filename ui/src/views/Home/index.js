@@ -52,21 +52,20 @@ fetch(`https://geocode.maps.co/search?postalcode=${data[0].zipcode}`)
         if(!response.ok) {
           setError({status: response.status, statusText: response.statusText})
         }
-        console.log(response)
+        // console.log(response)
         return response.json() // parse the response data
       })
       .then((result) => {
           setLat(result[1].lat)
           setLong(result[1].lon)
-          console.log(result)
       }) 
       console.log(lat,long)
 
   return (
     <Paper>
       {isUserLoggedIn() ? (
-        <Map height={600} defaultCenter={[lat, long]} defaultZoom={13}>
-          <Marker width={20} anchor={[lat, long]} />
+        <Map height={600} defaultCenter={[32.7765, -79.9311]} defaultZoom={13}>
+          <Marker width={50} anchor={[32.7765, -79.9311]} />
         </Map>
       ) : (
         <Link to="/login">
