@@ -60,12 +60,13 @@ fetch(`https://geocode.maps.co/search?postalcode=${data[0].zipcode}`)
           setLong(result[1].lon)
           console.log(result)
       }) 
+      console.log(lat,long)
 
   return (
     <Paper>
       {isUserLoggedIn() ? (
-        <Map height={600} defaultCenter={[32.7765, -79.9311]} defaultZoom={13}>
-          <Marker width={50} anchor={[32.7765, -79.9311]} />
+        <Map height={600} defaultCenter={[lat, long]} defaultZoom={13}>
+          <Marker width={20} anchor={[lat, long]} />
         </Map>
       ) : (
         <Link to="/login">
