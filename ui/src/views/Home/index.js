@@ -56,8 +56,8 @@ fetch(`https://geocode.maps.co/search?postalcode=${data[0].zipcode}`)
         return response.json() // parse the response data
       })
       .then((result) => {
-          setLat(result[0].lat)
-          setLong(result[0].lon)
+          setLat(result[1].lat)
+          setLong(result[1].lon)
           console.log(result)
       }) 
 
