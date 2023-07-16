@@ -1,5 +1,5 @@
 import { Paper } from "@mui/material";
-import { Map, Marker } from "pigeon-maps";
+import { Map, Marker, ZoomControl } from "pigeon-maps";
 import {
   isUserLoggedIn,
 } from "../../utility/utils";
@@ -53,12 +53,14 @@ fetch(`https://geocode.maps.co/search?postalcode=${data[0].zipcode}`)
         return response.json() // parse the response data
       })
       .then((result) => {
-          setLat(result[1].lat)
-          setLong(result[1].lon)
+        console.log((parseFloat(result[1].boundingbox[0])+parseFloat(result[1].boundingbox[1]))/2)
+        console.log(result[1].boundingbox)
+          setLat((parseFloat(result[1].boundingbox[0])+parseFloat(result[1].boundingbox[1]))/2)
+          setLong((parseFloat(result[1].boundingbox[2])+parseFloat(result[1].boundingbox[3]))/2)
       }) 
       console.log(lat,long)
 
-      if (!lat && !long) { // guard clause to prevent runtime errors
+      if (lat==null && long==null) { // guard clause to prevent runtime errors
         return ( 
           <div>
             <div>Loading...</div>
@@ -68,8 +70,9 @@ fetch(`https://geocode.maps.co/search?postalcode=${data[0].zipcode}`)
   return (
     <Paper>
       {isUserLoggedIn() && lat !== null && long !==null ? (
-        <Map height={600} defaultCenter={[32.7765, -79.9311]} defaultZoom={13}>
+        <Map height={600} defaultCenter={[lat, long]} defaultZoom={11} >
           <Marker width={50} anchor={[32.7765, -79.9311]} />
+          <ZoomControl/>
         </Map>
       ) : (
         <Link to="/login">
