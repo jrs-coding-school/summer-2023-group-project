@@ -17,12 +17,13 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import { getAllCrimes } from "../../utility/api";
+import { getAllCrimes, getMe } from "../../utility/api";
+import {isUserLoggedIn} from "../../utility/utils";
 
 //Create Text fields to Report Crime within
 function ReportCrime(props) {
   //Hold the users input data
-  const [crimeId, setCrimeId] = useState({});
+  const [crimeById, setCrimeById] = useState({});
   const [addressData, setAddressData] = useState("");
   const [cityData, setCityData] = useState("");
   const [stateData, setStateData] = useState("");
@@ -35,32 +36,36 @@ function ReportCrime(props) {
   const [lon, setLon] = useState();
   const [dateTime, setDateTime] = useState();
 
-  //Parses the user id from their given token
-  function parseJwt(token) {
-    var base64Url = token.split(".")[1];
-    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
-    var jsonPayload = decodeURIComponent(
-      window
-        .atob(base64)
-        .split("")
-        .map(function (c) {
-          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-        })
-        .join("")
-    );
-
-    return JSON.parse(jsonPayload);
-  }
 
   //Get all crimes
+  useEffect(() => {
+    if (isUserLoggedIn()) {
+      const fetchData = async () => {
+        const user = await getMe()
+        console.log("USER:", user)
+        }
+      fetchData()
+    }
+  }, [])
+
   useEffect(() => {
     const getCrimes = async () => {
       const crimes = await getAllCrimes();
       setCrimes(crimes);
-      return crimes;
-    };
-    getCrimes();
-  }, []);
+          return crimes;
+        };
+        getCrimes();
+  }, [])
+  //   const getCrimes = async () => {
+  //     const crimes = await getAllCrimes();
+  //     setCrimes(crimes);
+  //     return crimes;
+  //   };
+  //   fetchData()
+  //   getCrimes();
+   
+  // }
+
 
   //Function Logic
   const handleSubmit = async (event) => {
@@ -77,9 +82,7 @@ function ReportCrime(props) {
     const county = await getCountyByCoords(lat, lon);
     setCountyData(county);
 
-    const token = parseJwt(getToken());
-
-    const userId = token.id;
+    const userId = user.id;
     const reportData = {
       userId: userId,
       address: addressData,
@@ -91,7 +94,7 @@ function ReportCrime(props) {
       lon: lon,
       description: details,
       isOngoing: ongoing,
-      crimeId: crimeId,
+      crimeId: crimeById,
       datetime: dateTime,
     };
     console.log(reportData);
@@ -179,7 +182,7 @@ function ReportCrime(props) {
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             label="ongoing"
-            onChange={(e) => setCrimeId(e.target.value)}
+            onChange={(e) => setCrimeById(e.target.value)}
           >
             {crimes.map((crime) => {
               return <MenuItem value={crime.id}>{crime.subtype}</MenuItem>;
