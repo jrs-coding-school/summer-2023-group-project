@@ -89,13 +89,21 @@ function Navbar() {
 									}}
 								/>
 							</Link>
-							<Link to='/report' style={{ textDecoration: 'none' }}><Button sx={{
+							{/* Check if user is logged in, if true link to /report : if false link to login */}
+							{isUserLoggedIn() ? <Link to='/report' style={{ textDecoration: 'none' }}><Button sx={{
+										display: { xs: 'none', md: 'flex' },
+										mr: 1,
+										textDecoration: 'none',
+										color: 'white',
+									}}>Report a Crime</Button></Link> 
+									:
+									<Link to='/login'><Button sx={{
 										// display: { xs: 'none', md: 'flex' },
 										mr: 1,
 										textDecoration: 'none',
 										color: 'white',
-									}}>Report a Crime</Button></Link>
-							
+										flex: 'row-reverse',
+									}}>Login to Report a Crime</Button></Link> }
 							<Menu
 								id='menu-appbar'
 								anchorEl={anchorElNav}
@@ -143,22 +151,7 @@ function Navbar() {
 								textDecoration: 'none',
 								color: 'white',
 							}}
-						>   {/* Check if user is logged in, if true link to /report : if false link to /login */}
-							{isUserLoggedIn() ? <Link to='/report' style={{ textDecoration: 'none' }}><Button sx={{
-										display: { xs: 'none', md: 'flex' },
-										mr: 1,
-										textDecoration: 'none',
-										color: 'white',
-									}}>Report a Crime</Button></Link> 
-									:
-									<Link to='/login'><Button sx={{
-										// display: { xs: 'none', md: 'flex' },
-										mr: 1,
-										textDecoration: 'none',
-										color: 'white',
-										flex: 'row-reverse',
-									}}>Login to Report a Crime</Button></Link> }
-							
+						>   
 							{/* linked the leaderboard trophy icon to /leaderboard */}
 							<Link to='/leaderboard'>
 								<EmojiEventsIcon
