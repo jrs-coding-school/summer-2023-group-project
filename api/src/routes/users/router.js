@@ -14,7 +14,7 @@ router.get('/me', authenticate, showMe)
 router.get('/id/:id', showById)
 router.post('/register', register)
 router.post('/login', login)
-router.put('/update/:id', updateUserById)
+router.put('/update/me', authenticate, updateUserById)
 
 // exporting router
 module.exports = router

@@ -66,11 +66,14 @@ export const register = async(data) => {
   return responseData
 }
 
-export const updateUserById = async(data, id) => {
-
-  const response = await fetch(`${baseUrl}/users/update/${id}`, {
+export const updateUserById = async(data) => {
+  const token = getToken()
+  const response = await fetch(`${baseUrl}/users/update/me`, {
     method: "PUT", 
-    headers: {'Content-Type': 'application/json'},
+    headers: new Headers({
+      "Authorization": `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }),
     body: JSON.stringify(data),
   })
 

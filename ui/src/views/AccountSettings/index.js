@@ -47,16 +47,6 @@ function AccountSettings(props) {
     }
   };
 
-  function parseJwt (token) {
-    var base64Url = token.split('.')[1];
-    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-
-    return JSON.parse(jsonPayload);
-}
-
   const handleSubmit = async (event) => {
     // prevents the submit button from refreshing the page
     event.preventDefault();
@@ -64,15 +54,12 @@ function AccountSettings(props) {
     let validatedInput = validateInput();
     if (validatedInput === true) {
       try {
-        const token = parseJwt(getToken())
-        const id = token.id
-        console.log(id)
-        await updateUserById(userData, id);
+        await updateUserById(userData);
       } catch (error) {
         console.log(error);
       }
       //if api post works, redirect to success page
-     // navigate("/register/success");
+     navigate("/");
     }
   };
 
