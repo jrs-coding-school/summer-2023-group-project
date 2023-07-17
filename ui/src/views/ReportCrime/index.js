@@ -20,7 +20,7 @@ import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { getAllCrimes } from "../../utility/api";
 
 //Create Text fields to Report Crime within
-function About(props) {
+function ReportCrime(props) {
   //Hold the users input data
   const [crimeId, setCrimeId] = useState({});
   const [addressData, setAddressData] = useState("");
@@ -205,4 +205,4 @@ function About(props) {
   );
 }
 
-export default About;
+export default ReportCrime;
