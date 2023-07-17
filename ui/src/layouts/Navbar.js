@@ -112,7 +112,7 @@ function Navbar() {
                   Report a Crime
                 </Button>
               </Link>
-
+              </Box>
 						<Box sx={{ flexGrow: 0 }}>
 							<Tooltip >
 								{/* profile avatar on far right side */}
