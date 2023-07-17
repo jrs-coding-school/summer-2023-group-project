@@ -14,6 +14,9 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import { styled, alpha } from '@mui/material/styles';
+import InputBase from '@mui/material/InputBase';
+import SearchIcon from '@mui/icons-material/Search';
 import { Link } from 'react-router-dom';
 import { blue } from '@mui/material/colors';
 import {getToken, isUserLoggedIn, setToken, clearToken} from '../utility/utils'
@@ -27,6 +30,7 @@ function Logout() {
 function Navbar() {
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
 	const [anchorElUser, setAnchorElUser] = React.useState(null);
+	const [anchorElSearch, setAnchorElSearch] = React.useState(null);
 
 	const handleOpenNavMenu = (event) => {
 		setAnchorElNav(event.currentTarget);
@@ -42,170 +46,221 @@ function Navbar() {
 	const handleCloseUserMenu = () => {
 		setAnchorElUser(null);
 	};
+
+	
+	  
+	  
 	return (
 		<Paper>
-			<AppBar position='static'>
-				<Container maxWidth='xl'>
+			<AppBar position="static">
+				<Container maxWidth="xl">
 					<Toolbar disableGutters>
 						{/* linked the iWitness text to the homepage */}
-						<Link to='/home' style={{ textDecoration: 'none', color: 'white' }}>
+						<Link
+							to="/home"
+							style={{ textDecoration: "none", color: "white" }}>
 							<Typography
-								variant='h6'
+								variant="h6"
 								noWrap
-								component='a'
-								href='/'
+								component="a"
+								href="/"
 								sx={{
 									mr: 2,
-									display: { xs: 'none', md: 'flex' },
-									fontFamily: 'monospace',
+									display: { xs: "none", md: "flex" },
+									fontFamily: "monospace",
 									fontWeight: 700,
-									letterSpacing: '.3rem',
-									color: 'inherit',
-									textDecoration: 'none',
-								}}
-							>
+									letterSpacing: ".3rem",
+									color: "inherit",
+									textDecoration: "none",
+								}}>
 								iWitness
 							</Typography>
 						</Link>
 
-						<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, alignItems:'center' }}>
-						<Link to='/leaderboard'>
+						<Box
+							sx={{
+								flexGrow: 1,
+								display: { xs: "flex", md: "none" },
+								alignItems: "center",
+							}}>
+							<Link to="/leaderboard">
 								<EmojiEventsIcon
 									sx={{
 										// display: { xs: 'none', md: 'flex' },
 										mr: 1,
-										textDecoration: 'none',
-										color: 'white',
+										textDecoration: "none",
+										color: "white",
 									}}
 								/>
 							</Link>
-							<Link to='/notfications'>
+							<Link to="/notfications">
 								<NotificationsIcon
 									sx={{
 										// display: { xs: 'none', md: 'flex' },
 										mr: 1,
-										textDecoration: 'none',
-										color: 'white',
+										textDecoration: "none",
+										color: "white",
 									}}
 								/>
 							</Link>
-							<Link to='/report' style={{ textDecoration: 'none' }}><Button sx={{
+							<Link
+								to="/report"
+								style={{ textDecoration: "none" }}>
+								<Button
+									sx={{
 										// display: { xs: 'none', md: 'flex' },
 										mr: 1,
-										textDecoration: 'none',
-										color: 'white',
-									}}>Report a Crime</Button></Link>
-							
+										textDecoration: "none",
+										color: "white",
+									}}>
+									Report a Crime
+								</Button>
+							</Link>
+
 							<Menu
-								id='menu-appbar'
+								id="menu-appbar"
 								anchorEl={anchorElNav}
 								anchorOrigin={{
-									vertical: 'bottom',
-									horizontal: 'left',
+									vertical: "bottom",
+									horizontal: "left",
 								}}
 								keepMounted
 								transformOrigin={{
-									vertical: 'top',
-									horizontal: 'left',
+									vertical: "top",
+									horizontal: "left",
 								}}
 								open={Boolean(anchorElNav)}
 								onClose={handleCloseNavMenu}
 								sx={{
-									display: { xs: 'block', md: 'none' },
-								}}
-							></Menu>
+									display: { xs: "block", md: "none" },
+								}}></Menu>
 						</Box>
 						<Typography
-							variant='h5'
+							variant="h5"
 							noWrap
-							component='a'
-							href=''
+							component="a"
+							href=""
 							sx={{
 								mr: 2,
-								display: { xs: 'flex', md: 'none' },
+								display: { xs: "flex", md: "none" },
 								flexGrow: 1,
-								fontFamily: 'monospace',
+								fontFamily: "monospace",
 								fontWeight: 700,
-								letterSpacing: '.3rem',
-								color: 'inherit',
-								textDecoration: 'none',
-							}}
-						>
+								letterSpacing: ".3rem",
+								color: "inherit",
+								textDecoration: "none",
+							}}>
 							iWitness
 						</Typography>
+						
+						
 						<Box
 							sx={{
 								flexGrow: 1,
-								display: { xs: 'none', md: 'flex' },
-								flexDirection: 'flex-end',
-								alignItems: 'center',
-								justifyContent: 'flex-end',
-								textDecoration: 'none',
-								color: 'white',
-							}}
-						>
-							<Link to='/report' style={{ textDecoration: 'none' }}><Button sx={{
-										display: { xs: 'none', md: 'flex' },
+								display: { xs: "none", md: "flex" },
+								flexDirection: "flex-end",
+								alignItems: "center",
+								justifyContent: "flex-end",
+								textDecoration: "none",
+								color: "white",
+							}}>
+							<Link
+								to="/report"
+								style={{ textDecoration: "none" }}>
+								<Button
+									sx={{
+										display: { xs: "none", md: "flex" },
 										mr: 1,
-										textDecoration: 'none',
-										color: 'white',
-									}}>Report a Crime</Button></Link>
+										textDecoration: "none",
+										color: "white",
+									}}>
+									Report a Crime
+								</Button>
+							</Link>
 							{/* linked the leaderboard trophy icon to /leaderboard */}
-							<Link to='/leaderboard'>
+							<Link to="/leaderboard">
 								<EmojiEventsIcon
 									sx={{
-										display: { xs: 'none', md: 'flex' },
+										display: { xs: "none", md: "flex" },
 										mr: 1,
-										textDecoration: 'none',
-										color: 'white',
+										textDecoration: "none",
+										color: "white",
 									}}
 								/>
 							</Link>
 							{/* link the notification bell icon to /notifications */}
-							<Link to='/notfications'>
+							<Link to="/notfications">
 								<NotificationsIcon
 									sx={{
-										display: { xs: 'none', md: 'flex' },
+										display: { xs: "none", md: "flex" },
 										mr: 1,
-										textDecoration: 'none',
-										color: 'white',
+										textDecoration: "none",
+										color: "white",
 									}}
 								/>
 							</Link>
 						</Box>
 
 						<Box sx={{ flexGrow: 0 }}>
-							<Tooltip >
+							<Tooltip>
 								{/* profile avatar on far right side */}
-								{isUserLoggedIn() ? <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-									<Avatar alt='Profile' />
-								</IconButton> :<Link to='/login'><Button sx={{
-										// display: { xs: 'none', md: 'flex' },
-										mr: 1,
-										textDecoration: 'none',
-										color: 'white',
-										flex: 'row-reverse',
-									}}>Login</Button></Link> }
+								{isUserLoggedIn() ? (
+									<IconButton
+										onClick={handleOpenUserMenu}
+										sx={{ p: 0 }}>
+										<Avatar alt="Profile" />
+									</IconButton>
+								) : (
+									<Link to="/login">
+										<Button
+											sx={{
+												// display: { xs: 'none', md: 'flex' },
+												mr: 1,
+												textDecoration: "none",
+												color: "white",
+												flex: "row-reverse",
+											}}>
+											Login
+										</Button>
+									</Link>
+								)}
 							</Tooltip>
 							<Menu
-								sx={{ mt: '45px',}}
-								id='menu-appbar'
+								sx={{ mt: "45px" }}
+								id="menu-appbar"
 								anchorEl={anchorElUser}
 								anchorOrigin={{
-									vertical: 'top',
-									horizontal: 'right',
+									vertical: "top",
+									horizontal: "right",
 								}}
 								keepMounted
 								transformOrigin={{
-									vertical: 'top',
-									horizontal: 'right',
+									vertical: "top",
+									horizontal: "right",
 								}}
 								open={Boolean(anchorElUser)}
-								onClose={handleCloseUserMenu}
-							>
-								<MenuItem><Link to='/profile' style={{ textDecoration: 'none'}}>Profile</Link></MenuItem>
-								<MenuItem><Link to='/account' style={{ textDecoration: 'none' }}>Account</Link></MenuItem>
-								<MenuItem onClick={() => Logout()}><Link to='/' style={{ textDecoration: 'none' }}>Logout</Link></MenuItem>
+								onClose={handleCloseUserMenu}>
+								<MenuItem>
+									<Link
+										to="/profile"
+										style={{ textDecoration: "none" }}>
+										Profile
+									</Link>
+								</MenuItem>
+								<MenuItem>
+									<Link
+										to="/account"
+										style={{ textDecoration: "none" }}>
+										Account
+									</Link>
+								</MenuItem>
+								<MenuItem onClick={() => Logout()}>
+									<Link
+										to="/"
+										style={{ textDecoration: "none" }}>
+										Logout
+									</Link>
+								</MenuItem>
 							</Menu>
 						</Box>
 					</Toolbar>
