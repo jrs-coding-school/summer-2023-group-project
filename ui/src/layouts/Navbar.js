@@ -90,7 +90,7 @@ function Navbar() {
 								/>
 							</Link>
 							{/* Check if user is logged in, if true link to /report : if false link to login */}
-							{isUserLoggedIn ? ( <Link to='/report/new' style={{ textDecoration: 'none' }}><Button sx={{
+							{isUserLoggedIn ? ( <Link to='/reports/new' style={{ textDecoration: 'none' }}><Button sx={{
 										display: { xs: 'none', md: 'flex' },
 										mr: 1,
 										textDecoration: 'none',
