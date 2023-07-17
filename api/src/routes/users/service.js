@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt')
 
 exports.findAllUsers = async () => {
   const results = await knex('users').select("*")
-  // console.log('results: ', results)
 
   return results
 }

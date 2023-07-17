@@ -85,7 +85,7 @@ export const getAllUsers = async(data) => {
   if (!response.ok) {
     throw new Error(`Status Code: ${response?.status} - ${responseData?.message}`)
   }
-
+  
   return responseData
 }
 
@@ -103,6 +103,7 @@ export const getMe = async() => {
     }),
   })
 
+  
   const responseData = await response.json()
 
   if (!response.ok) {

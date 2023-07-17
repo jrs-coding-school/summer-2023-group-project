@@ -3,19 +3,17 @@ require('dotenv').config()
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-const { findById, findAll, createUser, findByUsername } = require('./service')
+const { findById, findAllUsers, createUser, findByUsername } = require('./service')
 
 exports.showAll = async (req, res) => {
   try {
-    console.log('auth req.user: ', req.user)
 
     // Only allow admins to access the user list
-    if (!user || user.role !== 'admin') {
+    if (!req.user || req.user.role !== 'admin') {
       return res.status(403).json({ error: 'You do not have permission to access this resource' })
     }
 
-    const allUsers = await findAll()
-    console.log('allUsers: ', allUsers)
+    const allUsers = await findAllUsers()
     return res.json(allUsers)
 
   } catch (error) {
