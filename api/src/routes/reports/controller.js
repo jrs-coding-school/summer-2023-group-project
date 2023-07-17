@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-const { findReportById } = require('./service')
+const { findReportById, addNewReport } = require('./service')
 
 
 exports.showReportById = async (req, res) => {
@@ -20,5 +20,23 @@ exports.showReportById = async (req, res) => {
   }
 
 }
+exports.createNewReport = async (req, res) => {
+  try {
+
+    const newReport = req.body
+    // Only allow admins and account owners to access the user data
+    const report = await addNewReport(newReport)
+    return res.json(report)
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json()
+  }
+
+  if(error.code === 'ER_DUP_ENTRY') {
+    return res.status(409).json({ message: "Report already exists" })
+  }
+
+}
+
 
 
