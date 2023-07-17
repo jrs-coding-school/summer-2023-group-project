@@ -8,7 +8,7 @@ exports.findAllUsers = async () => {
   return results
 }
 
-exports.showUserById = async (id) => {
+exports.findById = async (id) => {
 
   const user = await knex('users')
     .where('id', id)
