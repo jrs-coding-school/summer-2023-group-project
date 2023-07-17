@@ -143,7 +143,7 @@ function Navbar() {
 								textDecoration: 'none',
 								color: 'white',
 							}}
-						>   {/* Check if user is logged in, if true link to /report : if false link to login */}
+						>   {/* Check if user is logged in, if true link to /report : if false link to /login */}
 							{isUserLoggedIn() ? <Link to='/report' style={{ textDecoration: 'none' }}><Button sx={{
 										display: { xs: 'none', md: 'flex' },
 										mr: 1,

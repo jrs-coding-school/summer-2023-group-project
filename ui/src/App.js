@@ -7,6 +7,7 @@ import ThemeContextProvider from './context/themeContext'
 import Register from './views/Register'
 import Login from './views/Login'
 import Success from './views/Register/success'
+import ReportCrime from './views/ReportCrime'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/register" element={<Register/>}/>
             <Route path="/register/success" element={<Success/>}/>
             <Route path="/login" element={<Login/>}/>
+            <Route path="/report" element={<ReportCrime/>}/>
             <Route path="*" element={<NotFound/>}/>
           </Route>
         </Routes>
