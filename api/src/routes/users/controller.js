@@ -7,11 +7,7 @@ const { findById, findAll, createUser, findByUsername } = require('./service')
 
 exports.showAll = async (req, res) => {
   try {
-    console.log('auth req.userId: ', req.userId)
-    //get the authenticated user using the userId provided from authentication
-    const user = await  findById(req.userId)
-
-    console.log('user: ', user)
+    console.log('auth req.user: ', req.user)
 
     // Only allow admins to access the user list
     if (!user || user.role !== 'admin') {
@@ -28,14 +24,37 @@ exports.showAll = async (req, res) => {
   }
 }
 
-exports.showById = async (req, res) => {
+exports.showMe = async (req, res) => {
   try {
-    if (!req.userId) {
+    if (!req.user) {
       return res.status(401).json({ error: 'Invalid token provided' })
     }
-    console.log('auth req.userId: ', req.userId)
+    console.log('auth req.user: ', req.user)
+    const user = {...req.user}
+    
+    if (!user) {
+      return res.status(404).json('No User Found')
+    }
+
+    delete user.password
+    delete user.createdAt
+
+    return res.json(user)
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json()
+  }
+
+}
+
+exports.showById = async (req, res) => {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ error: 'Invalid token provided' })
+    }
+    console.log('auth req.user: ', req.user)
     //get the authenticated user using the userId provided from authentication
-    const user = await  findById(req.userId)
+    const user = await  findById(req.user.id)
 
     console.log('user: ', user)
 

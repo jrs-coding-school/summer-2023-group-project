@@ -147,4 +147,40 @@ export const getAllCrimes = async () => {
   const response = await fetch(`${baseUrl}/crimes/`)
   const responseData = await response.json()
   return responseData
-};
+}
+
+export const getMe = async() => {
+
+  const token = getToken()
+  if (!token) {
+    throw new Error(`Missing User Token`)
+  }
+
+  const response = await fetch(`${baseUrl}/users/me`, {
+    method: "GET",
+    headers: new Headers({
+      "Authorization": `Bearer ${token}` //Token is required for protected Routes
+    }),
+  })
+
+  const responseData = await response.json()
+
+  if (!response.ok) {
+    throw new Error(`Status Code: ${response?.status} - ${responseData?.message}`)
+  }
+
+  return responseData
+}
+
+export const getCoords = async (zipcode) => {
+
+  const response = await fetch(`https://geocode.maps.co/search?postalcode=${zipcode}&country=USA`)
+
+  const responseData = await response.json()
+
+  if (!response.ok) {
+    throw new Error(`failed to get coords`)
+  }
+
+  return responseData
+}

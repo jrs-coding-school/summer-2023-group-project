@@ -113,154 +113,45 @@ function Navbar() {
                 </Button>
               </Link>
 
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: "block", md: "none" },
-                }}
-              ></Menu>
-            </Box>
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href=""
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              iWitness
-            </Typography>
-            <Box
-              sx={{
-                flexGrow: 1,
-                display: { xs: "none", md: "flex" },
-                flexDirection: "flex-end",
-                alignItems: "center",
-                justifyContent: "flex-end",
-                textDecoration: "none",
-                color: "white",
-              }}
-            >
-              <Link to="/report" style={{ textDecoration: "none" }}>
-                <Button
-                  sx={{
-                    display: { xs: "none", md: "flex" },
-                    mr: 1,
-                    textDecoration: "none",
-                    color: "white",
-                  }}
-                >
-                  Report a Crime
-                </Button>
-              </Link>
-              {/* linked the leaderboard trophy icon to /leaderboard */}
-              <Link to="/leaderboard">
-                <EmojiEventsIcon
-                  sx={{
-                    display: { xs: "none", md: "flex" },
-                    mr: 1,
-                    textDecoration: "none",
-                    color: "white",
-                  }}
-                />
-              </Link>
-              {/* link the notification bell icon to /notifications */}
-              <Link to="/notfications">
-                <NotificationsIcon
-                  sx={{
-                    display: { xs: "none", md: "flex" },
-                    mr: 1,
-                    textDecoration: "none",
-                    color: "white",
-                  }}
-                />
-              </Link>
-            </Box>
-
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip>
-                {/* profile avatar on far right side */}
-                {isUserLoggedIn() ? (
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Profile" />
-                  </IconButton>
-                ) : (
-                  <Link to="/login">
-                    <Button
-                      sx={{
-                        // display: { xs: 'none', md: 'flex' },
-                        mr: 1,
-                        textDecoration: "none",
-                        color: "white",
-                        flex: "row-reverse",
-                      }}
-                    >
-                      Login
-                    </Button>
-                  </Link>
-                )}
-              </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                <MenuItem>
-                  <Link to="/profile" style={{ textDecoration: "none" }}>
-                    Profile
-                  </Link>
-                </MenuItem>
-                <MenuItem>
-                  <Link
-                    to="/account/settings"
-                    style={{ textDecoration: "none" }}
-                  >
-                    Account
-                  </Link>
-                </MenuItem>
-                <MenuItem onClick={() => Logout()}>
-                  <Link to="/home" style={{ textDecoration: "none" }}>
-                    Logout
-                  </Link>
-                </MenuItem>
-              </Menu>
-            </Box>
-          </Toolbar>
-        </Container>
-      </AppBar>
-    </Paper>
-  );
+						<Box sx={{ flexGrow: 0 }}>
+							<Tooltip >
+								{/* profile avatar on far right side */}
+								{isUserLoggedIn() ? <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+									<Avatar alt='Profile' />
+								</IconButton> :<Link to='/login'><Button sx={{
+										// display: { xs: 'none', md: 'flex' },
+										mr: 1,
+										textDecoration: 'none',
+										color: 'white',
+										flex: 'row-reverse',
+									}}>Login</Button></Link> }
+							</Tooltip>
+							<Menu
+								sx={{ mt: '45px',}}
+								id='menu-appbar'
+								anchorEl={anchorElUser}
+								anchorOrigin={{
+									vertical: 'top',
+									horizontal: 'right',
+								}}
+								keepMounted
+								transformOrigin={{
+									vertical: 'top',
+									horizontal: 'right',
+								}}
+								open={Boolean(anchorElUser)}
+								onClose={handleCloseUserMenu}
+							>
+								<MenuItem><Link to='/profile' style={{ textDecoration: 'none'}}>Profile</Link></MenuItem>
+								<MenuItem><Link to='/account' style={{ textDecoration: 'none' }}>Account</Link></MenuItem>
+								<MenuItem onClick={() => Logout()}><Link to='/' style={{ textDecoration: 'none' }}>Logout</Link></MenuItem>
+							</Menu>
+						</Box>
+					</Toolbar>
+				</Container>
+			</AppBar>
+		</Paper>
+	);
 }
 
 export default Navbar;
