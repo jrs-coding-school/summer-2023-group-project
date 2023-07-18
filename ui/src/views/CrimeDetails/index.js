@@ -6,6 +6,10 @@ import { useParams } from "react-router-dom";
 function CrimeDetails() {
     //** Destructure Props
   const { id } = useParams()
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+   
+ 
 //     //** State Variables
 //     const [currentCrime, setCurrentCrime] = useState();
 //     console.log(currentCrime)
@@ -37,8 +41,6 @@ function CrimeDetails() {
 //   }
 //   export default CrimeDetails
 
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
   console.log(data)
   useEffect(() => {
     fetch(`http://localhost:9000/reports/${id}`)
@@ -63,12 +65,15 @@ if (!data) {
   }
 const filteredData = data.filter(item => item.id == id )
 console.log(filteredData)
+
+
 return (
-    //need to get data from array of objects where the id from the report matches the id from params
+    //doesn't change when you change the id param in the url
     <div>
       <h4>{data[0].description}</h4>
       <h4>{data[0].city}</h4>
       <h4>{data[0].state}</h4>
+      <h4>{data[0].datetime}</h4>
     </div>
 )
     
