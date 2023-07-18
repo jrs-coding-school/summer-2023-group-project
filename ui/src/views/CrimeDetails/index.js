@@ -68,12 +68,11 @@ console.log(filteredData)
 
 
 return (
-    //doesn't change when you change the id param in the url
     <div>
-      <h4>{data[0].description}</h4>
-      <h4>{data[0].city}</h4>
-      <h4>{data[0].state}</h4>
-      <h4>{data[0].datetime}</h4>
+      <h4>{filteredData[0].description}</h4>
+      <h4>{filteredData[0].city}</h4>
+      <h4>{filteredData[0].state}</h4>
+      <h4>{filteredData[0].datetime}</h4>
     </div>
 )
     
