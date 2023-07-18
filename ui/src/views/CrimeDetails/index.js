@@ -5,8 +5,7 @@ import { useParams } from "react-router-dom";
 
 function CrimeDetails() {
     //** Destructure Props
-   
-    const { id } = useParams()
+  const { id } = useParams()
 //     //** State Variables
 //     const [currentCrime, setCurrentCrime] = useState();
 //     console.log(currentCrime)
@@ -62,20 +61,17 @@ if (!data) {
       </div>
     )
   }
-
+const filteredData = data.filter(item => item.crimeId == id )
+console.log(filteredData)
 return (
+    //need to get data from array of objects where the crimeId matches the id from params
     <div>
-      {data.map((data) => {
-        return (
-          <div>
-            <h4>{data.description}</h4>
-            <h4>{data.city}</h4>
-            <h4>{data.state}</h4>
+      <h4>{data[0].description}</h4>
+      <h4>{data[0].city}</h4>
+      <h4>{data[0].state}</h4>
     </div>
-            );
-        })}
-    </div>
-);
+)
+    
 }
 export default CrimeDetails
 
