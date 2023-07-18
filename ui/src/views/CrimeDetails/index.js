@@ -61,10 +61,10 @@ if (!data) {
       </div>
     )
   }
-const filteredData = data.filter(item => item.crimeId == id )
+const filteredData = data.filter(item => item.id == id )
 console.log(filteredData)
 return (
-    //need to get data from array of objects where the crimeId matches the id from params
+    //need to get data from array of objects where the id from the report matches the id from params
     <div>
       <h4>{data[0].description}</h4>
       <h4>{data[0].city}</h4>
