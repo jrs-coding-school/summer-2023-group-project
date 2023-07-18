@@ -11,7 +11,7 @@ exports.index = async (req, res) => {
 
 
 exports.showById = (req, res) => {
-// console.log('movie id', req.params.id)
+// console.log('crime id', req.params.id)
   const id = req.params.id
     //Get crime by ID
   const foundCrime = getById(id)
