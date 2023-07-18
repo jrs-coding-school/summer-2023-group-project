@@ -47,7 +47,45 @@ function Navbar() {
 		setAnchorElUser(null);
 	};
 
-	
+	const StyledInputBase = styled(InputBase)(({ theme }) => ({
+		color: 'inherit',
+		'& .MuiInputBase-input': {
+		  padding: theme.spacing(1, 1, 1, 0),
+		  // vertical padding + font size from searchIcon
+		  paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+		  transition: theme.transitions.create('width'),
+		  width: '100%',
+		  [theme.breakpoints.up('md')]: {
+			width: '20ch',
+		  },
+		},
+	  }));
+
+	  const Search = styled('div')(({ theme }) => ({
+		position: 'relative',
+		borderRadius: theme.shape.borderRadius,
+		backgroundColor: alpha(theme.palette.common.white, 0.15),
+		'&:hover': {
+		  backgroundColor: alpha(theme.palette.common.white, 0.25),
+		},
+		marginRight: theme.spacing(2),
+		marginLeft: 0,
+		width: '100%',
+		[theme.breakpoints.up('sm')]: {
+		  marginLeft: theme.spacing(3),
+		  width: 'auto',
+		},
+	  }));
+	   
+	  const SearchIconWrapper = styled('div')(({ theme }) => ({
+		padding: theme.spacing(0, 2),
+		height: '100%',
+		position: 'absolute',
+		pointerEvents: 'none',
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+	  }));
 	  
 	  
 	return (
@@ -57,7 +95,7 @@ function Navbar() {
 					<Toolbar disableGutters>
 						{/* linked the iWitness text to the homepage */}
 						<Link
-							to="/home"
+							to="/"
 							style={{ textDecoration: "none", color: "white" }}>
 							<Typography
 								variant="h6"
@@ -83,40 +121,6 @@ function Navbar() {
 								display: { xs: "flex", md: "none" },
 								alignItems: "center",
 							}}>
-							<Link to="/leaderboard">
-								<EmojiEventsIcon
-									sx={{
-										// display: { xs: 'none', md: 'flex' },
-										mr: 1,
-										textDecoration: "none",
-										color: "white",
-									}}
-								/>
-							</Link>
-							<Link to="/notfications">
-								<NotificationsIcon
-									sx={{
-										// display: { xs: 'none', md: 'flex' },
-										mr: 1,
-										textDecoration: "none",
-										color: "white",
-									}}
-								/>
-							</Link>
-							<Link
-								to="/report"
-								style={{ textDecoration: "none" }}>
-								<Button
-									sx={{
-										// display: { xs: 'none', md: 'flex' },
-										mr: 1,
-										textDecoration: "none",
-										color: "white",
-									}}>
-									Report a Crime
-								</Button>
-							</Link>
-
 							<Menu
 								id="menu-appbar"
 								anchorEl={anchorElNav}
@@ -133,27 +137,8 @@ function Navbar() {
 								onClose={handleCloseNavMenu}
 								sx={{
 									display: { xs: "block", md: "none" },
-								}}></Menu>
+						}}></Menu>
 						</Box>
-						<Typography
-							variant="h5"
-							noWrap
-							component="a"
-							href=""
-							sx={{
-								mr: 2,
-								display: { xs: "flex", md: "none" },
-								flexGrow: 1,
-								fontFamily: "monospace",
-								fontWeight: 700,
-								letterSpacing: ".3rem",
-								color: "inherit",
-								textDecoration: "none",
-							}}>
-							iWitness
-						</Typography>
-						
-						
 						<Box
 							sx={{
 								flexGrow: 1,
@@ -164,8 +149,19 @@ function Navbar() {
 								textDecoration: "none",
 								color: "white",
 							}}>
+							<Link to="/reports/search">
+								<Search>
+									<SearchIconWrapper>
+										<SearchIcon />
+									</SearchIconWrapper>
+									<StyledInputBase
+									placeholder="Search…"
+									inputProps={{ "aria-label": "search" }}
+									/>
+								</Search>
+							</Link>
 							<Link
-								to="/report"
+								to="/reports"
 								style={{ textDecoration: "none" }}>
 								<Button
 									sx={{

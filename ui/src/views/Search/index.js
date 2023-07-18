@@ -1,63 +1,44 @@
-import { Paper } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { useEffect , useState } from 'react'
+import { getReports } from '../../utility/api';
+import { Paper } from '@mui/material';
+import { Map, Marker } from 'pigeon-maps';
+
+
+
+
 
 function Search(props) {
 
-    const handleSearch = () => {
+    const [report, setReport] = useState(null)
+//get all reports 
+    useEffect(() => { 
 
-	}
-	const StyledInputBase = styled(InputBase)(({ theme }) => ({
-		color: 'inherit',
-		'& .MuiInputBase-input': {
-		  padding: theme.spacing(1, 1, 1, 0),
-		  // vertical padding + font size from searchIcon
-		  paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-		  transition: theme.transitions.create('width'),
-		  width: '100%',
-		  [theme.breakpoints.up('md')]: {
-			width: '20ch',
-		  },
-		},
-	  }));
+        const fetchReports = async () => {
+            const allReports = await getReports()
+            console.log("allReports: ", allReports)
+            setReport(allReports)
+          }
 
-	  const Search = styled('div')(({ theme }) => ({
-		position: 'relative',
-		borderRadius: theme.shape.borderRadius,
-		backgroundColor: alpha(theme.palette.common.white, 0.15),
-		'&:hover': {
-		  backgroundColor: alpha(theme.palette.common.white, 0.25),
-		},
-		marginRight: theme.spacing(2),
-		marginLeft: 0,
-		width: '100%',
-		[theme.breakpoints.up('sm')]: {
-		  marginLeft: theme.spacing(3),
-		  width: 'auto',
-		},
-	  }));
-	   
-	  const SearchIconWrapper = styled('div')(({ theme }) => ({
-		padding: theme.spacing(0, 2),
-		height: '100%',
-		position: 'absolute',
-		pointerEvents: 'none',
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-	  }));
+        fetchReports()
+        
+      }, [])
+      
+	//get list of reports by county
+    //get coords for each report
+    // display a marker for each individual report at the specified coords
 
   return (
-		<Link to="/search">
-			<Search>
-				<SearchIconWrapper>
-					<SearchIcon />
-				</SearchIconWrapper>
-				<StyledInputBase
-					placeholder="Search…"
-					inputProps={{ "aria-label": "search" }}
-				/>
-			</Search>
-		</Link>
+    
+		<Paper>	
+            <Map height={600} center={[32.793511, -79.940295]}>
+                <Marker 
+                    width={50}
+                    anchor={[32.793511, -79.940295]} 
+                    />
+            </Map>
+        </Paper>
+			
+            
 	);
 }
 
