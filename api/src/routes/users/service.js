@@ -53,6 +53,11 @@ exports.modifyUser = async (userData, id) => {
   return await knex('users').update(userData).where('id', id) // return the data you need excluding the password
 }
 
+exports.deleteUser = async (id) => {
+  // Insert the user into the database and return
+  return await knex('users').delete().where('id', id) // return the data you need excluding the password
+}
+
 exports.findByUsername = async (username) => {
   // Find the first user in the database with the username
 const user = await knex('users')

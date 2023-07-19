@@ -86,6 +86,23 @@ export const updateUserById = async(data) => {
   return responseData
 }
 
+export const deleteUserById = async(id) => {
+
+  const response = await fetch(`${baseUrl}/users/delete/${id}`, {
+    method: "DELETE", 
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(),
+  })
+
+  const responseData = await response.json(response.body)
+
+  if (!response.ok) {
+    throw new Error(`Status Code: ${response?.status} - ${responseData?.message}`)
+  }
+
+  return responseData
+}
+
 export const getAllUsers = async(data) => {
 
   const token = getToken()
