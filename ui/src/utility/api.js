@@ -144,3 +144,31 @@ export const getCoords = async (zipcode) => {
 
   return responseData
 }
+
+export const getReportsByCounty = async (county) => {
+
+  const response = await fetch(`${baseUrl}/reports/county/${county}`, {
+    method: "GET",
+  })
+
+  const responseData = await response.json()
+
+  if (!response.ok) {
+    throw new Error(`Status Code: ${response?.status} - ${responseData?.message}`)
+  }
+
+  return responseData
+}
+
+export const getLocationByAddress = async (search) => {
+
+  const response = await fetch(`https://geocode.maps.co/search?q=${search}&country=USA`)
+
+  const responseData = await response.json()
+
+  if (!response.ok) {
+    throw new Error(`failed to get coords`)
+  }
+
+  return responseData
+}
