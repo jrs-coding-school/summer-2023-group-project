@@ -195,6 +195,9 @@ function Navbar() {
 							>
 								<MenuItem><Link to='/profile' style={{ textDecoration: 'none'}}>Profile</Link></MenuItem>
 								<MenuItem><Link to='/account/settings' style={{ textDecoration: 'none' }}>Account Settings</Link></MenuItem>
+                {!isUserAdmin ? null : 
+                  <MenuItem><Link to='/adminpanel' style={{ textDecoration: 'none' }}>Admin Panel</Link></MenuItem>
+                }
 								<MenuItem onClick={() => Logout()}><Link to='/' style={{ textDecoration: 'none' }}>Logout</Link></MenuItem>
 							</Menu>
 						</Box>
