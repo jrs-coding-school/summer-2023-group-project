@@ -32,8 +32,8 @@ function ReportCrime(props) {
   const [details, setDetails] = useState("");
   const [ongoing, setOngoing] = useState();
   const [crimes, setCrimes] = useState();
-  const [lat, setLat] = useState();
-  const [lon, setLon] = useState();
+  // const [lat, setLat] = useState();
+  // const [lon, setLon] = useState();
   const [dateTime, setDateTime] = useState();
 
 
@@ -70,28 +70,21 @@ function ReportCrime(props) {
   //Function Logic
   const handleSubmit = async (event) => {
     //console.log(addressData, cityData, stateData, zipData, details, personalInformation, additionalInformation)
-
-    setAddressData(addressData);
-    setCityData(cityData);
-    setStateData(stateData);
-    setZipData(zipData);
-    setDetails(details);
-    const coords = await getCoordsByAddress(addressData, zipData);
-    setLat(coords.lat);
-    setLon(coords.lon);
-    const county = await getCountyByCoords(lat, lon);
+    const coords = await getCoordsByAddress(addressData, cityData, zipData);
+    console.log(coords)
+    // setLat(coords.lat);
+    // setLon(coords.lon);
+    const county = await getCountyByCoords(coords.lat, coords.lon);
     setCountyData(county);
 
-    const userId = user.id;
     const reportData = {
-      userId: userId,
       address: addressData,
       zipcode: zipData,
       city: cityData,
       county: countyData,
       state: stateData,
-      lat: lat,
-      lon: lon,
+      lat: coords.lat,
+      lon: coords.lon,
       description: details,
       isOngoing: ongoing,
       crimeId: crimeTypeId,
@@ -111,7 +104,7 @@ function ReportCrime(props) {
           label="Address or Location"
           onChange={(e) => setAddressData(e.target.value)}
           value={addressData}
-          id="outlined-start-adornment"
+          id="address"
           name="additionalInformation"
           fullWidth
           sx={{ m: 1 }}
@@ -122,7 +115,7 @@ function ReportCrime(props) {
           label="City"
           onChange={(e) => setCityData(e.target.value)}
           value={cityData}
-          id="outlined-start-adornment"
+          id="city"
           name="additionalInformation"
           fullWidth
           sx={{ m: 1 }}
@@ -133,7 +126,7 @@ function ReportCrime(props) {
           label="State"
           onChange={(e) => setStateData(e.target.value)}
           value={stateData}
-          id="outlined-start-adornment"
+          id="state"
           name="additionalInformation"
           fullWidth
           sx={{ m: 1 }}
@@ -144,7 +137,7 @@ function ReportCrime(props) {
           label="Zipcode"
           onChange={(e) => setZipData(e.target.value)}
           value={zipData}
-          id="outlined-start-adornment"
+          id="zipcode"
           name="additionalInformation"
           fullWidth
           sx={{ m: 1 }}
@@ -153,18 +146,18 @@ function ReportCrime(props) {
           label="Description of Crime"
           onChange={(e) => setDetails(e.target.value)}
           value={details}
-          id="outlined-start-adornment"
+          id="description"
           name="additionalInformation"
           fullWidth
           sx={{ m: 1 }}
         />
         <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">
+          <InputLabel id="ongoing-label">
             Is this crime ongoing?
           </InputLabel>
           <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
+            labelId="ongoing-label"
+            id="ongoing"
             label="ongoing"
             onChange={(e) => setOngoing(e.target.value)}
           >
@@ -175,12 +168,12 @@ function ReportCrime(props) {
         <br></br>
         <br></br>
         <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">
+          <InputLabel id="type-label">
             What type of crime?
           </InputLabel>
           <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
+            labelId="type-label"
+            id="type"
             label="ongoing"
             onChange={(e) => setCrimeTypeId(e.target.value)}
           >

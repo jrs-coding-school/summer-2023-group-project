@@ -120,12 +120,12 @@ export const createNewReport = async (reportData) => {
 };
 
 //Get Lat and Lon from Address
-export const getCoordsByAddress = async (address,zip) => {
-  const baseUrl = "https://geocode.maps.co/search?q=";
-  const response = await fetch(`${baseUrl}${address}+${zip}`, {
+export const getCoordsByAddress = async (address, city, zip) => {
+  const response = await fetch(`https://geocode.maps.co/search?q=${address}`, {
     method: "GET",
   });
   const responseData = await response.json()
+  console.log(responseData)
   const coords = {
     lat: responseData[0].lat,
     lon: responseData[0].lon,
