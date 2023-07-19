@@ -23,7 +23,7 @@ import {isUserLoggedIn} from "../../utility/utils";
 //Create Text fields to Report Crime within
 function ReportCrime(props) {
   //Hold the users input data
-  const [crimeById, setCrimeById] = useState({});
+  const [crimeTypeId, setCrimeTypeId] = useState({});
   const [addressData, setAddressData] = useState("");
   const [cityData, setCityData] = useState("");
   const [stateData, setStateData] = useState("");
@@ -94,7 +94,7 @@ function ReportCrime(props) {
       lon: lon,
       description: details,
       isOngoing: ongoing,
-      crimeId: crimeById,
+      crimeId: crimeTypeId,
       datetime: dateTime,
     };
     console.log(reportData);
@@ -182,7 +182,7 @@ function ReportCrime(props) {
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             label="ongoing"
-            onChange={(e) => setCrimeById(e.target.value)}
+            onChange={(e) => setCrimeTypeId(e.target.value)}
           >
             {crimes.map((crime) => {
               return <MenuItem value={crime.id}>{crime.subtype}</MenuItem>;
