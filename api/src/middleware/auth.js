@@ -27,6 +27,7 @@ exports.authenticate = async (req, res, next) => {
 
     // find a user with the id
     const Users = require('../routes/users/service')
+    console.log(Users)
     const user = await Users.findById(decoded.id)
 
     if (!user) {
