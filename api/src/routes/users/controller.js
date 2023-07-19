@@ -90,11 +90,6 @@ exports.updateUserById = async (req, res) => {
 
   } catch (error) {
     console.log(error)
-
-    if(error.code === 'ER_DUP_ENTRY') {
-      return res.status(409).json({ message: "Account already exists" })
-    }
-
     return res.status(500).json({ message: "Internal Server Error" })
   }
 }
@@ -108,11 +103,6 @@ exports.destroyUserById = async (req, res) => {
 
   } catch (error) {
     console.log(error)
-
-    if(error.code === 'ER_DUP_ENTRY') {
-      return res.status(409).json({ message: "Account already exists" })
-    }
-
     return res.status(500).json({ message: "Internal Server Error" })
   }
 }
