@@ -1,8 +1,5 @@
 const { Router } = require('express')
-const { showAllReports } = require('./controller')
-const { showCountyReports } = require('./controller')
-//import middleware
-const { logger } = require('../../middleware/logger')
+const { showAllReports, showCountyReports } = require('./controller')
 
 // create a new Router instance
 const router = new Router()
@@ -10,7 +7,7 @@ const router = new Router()
 // define routes
 
 router.get('/', showAllReports)
-router.get('/search', logger, showCountyReports)
+router.get('/county/:county', showCountyReports)
 
 // exporting router
 module.exports = router

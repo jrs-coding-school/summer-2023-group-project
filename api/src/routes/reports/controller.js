@@ -15,6 +15,7 @@ exports.showAllReports = async (req, res) => {
   }
   
   exports.showCountyReports = async (req, res) => {
+    console.log(req.params.county)
     try {
       const countyReports = await findReportsByCounty(req.params.county)
       console.log('countyReports: ', countyReports)

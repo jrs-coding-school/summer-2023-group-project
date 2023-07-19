@@ -10,9 +10,10 @@ exports.findAllReports = async () => {
   }
   //selects reports where input "county", from reports table
   exports.findReportsByCounty = async (county) => {
+    console.log("county:", county)
     const countyReports = await knex('reports')
-    .where('county: ', county)
-    .first('*')
+      .select("*")
+      .where('county', county.trimStart())
     console.log('countyReports: ', countyReports)
   
     return countyReports
