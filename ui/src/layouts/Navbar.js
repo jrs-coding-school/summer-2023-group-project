@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react
+import { useEffect, useState } from "react"
 import { Link } from 'react-router-dom';
 import {Paper, AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from "@mui/material";
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
@@ -10,8 +10,8 @@ import { getMe } from "../utility/api";
 //settings for the profile dropdown
 function Navbar() {
 
-	const [anchorElNav, setAnchorElNav] = React.useState(null);
-	const [anchorElUser, setAnchorElUser] = React.useState(null);
+	const [anchorElNav, setAnchorElNav] = useState(null);
+	const [anchorElUser, setAnchorElUser] = useState(null);
   const [myData, setMyData] = useState({});
   const settings = ["Profile", "Account", "Logout"];
 
