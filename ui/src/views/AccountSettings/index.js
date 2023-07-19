@@ -1,17 +1,12 @@
 import { Grid, Typography } from "@mui/material";
-import { register } from "../../utility/api";
-import { setToken } from "../../utility/utils";
+import { updateUserById } from "../../utility/api";
+import { getToken } from "../../utility/utils";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Register(props) {
+function AccountSettings(props) {
   const [userData, setUserdata] = useState({
-    username: "",
-    firstname: "",
-    lastname: "",
-    email: "",
-    zipcode: "",
-    password: "",
+   
   });
   const [validationErrorArray, setValidationErrorArray] = useState([]);
   const navigate = useNavigate();
@@ -24,32 +19,23 @@ function Register(props) {
     //check email is valid using regex
     const validationArray = []
     const validEmailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    if (userData.username.length < 3) {
+    if (userData.username === true && userData.username.length > 0 && userData.username.length < 3) {
       const errorMsg = "Please enter a username with more than 3 characters";
       validationArray.push(errorMsg)
     }
-    //check if a fist name is inputted
-     if (userData.firstname.length === 0) {
-      const errorMsg = "Please enter firstname";
-      validationArray.push(errorMsg)
-    }
-    // check if last name is inputted
-     if (userData.lastname.length === 0) {
-      const errorMsg = "Please enter lastname";
-      validationArray.push(errorMsg)
-    }
+    
     //check if zipcode is valid
-     if (userData.zipcode.length < 5) {
+     if (userData.zipcode === true && userData.zipcode.length > 0 && userData.zipcode.length < 5) {
       const errorMsg = "Please enter valid zipcode";
       validationArray.push(errorMsg)
     }
     //check password meets requirments
-     if (userData.password.length === 0) {
+     if (userData.password === true && userData.password.length > 0 && userData.password.length < 8) {
       const errorMsg = "Password must contain at least 8 Characters";
       validationArray.push(errorMsg)
     }
     //check email is valid using regex
-    if (!userData.email.match(validEmailRegex)) {
+    if (userData.email === true && userData.email > 0 && !userData.email.match(validEmailRegex)) {
       const errorMsg = "Please enter valid email";
       validationArray.push(errorMsg)
     } 
@@ -68,16 +54,12 @@ function Register(props) {
     let validatedInput = validateInput();
     if (validatedInput === true) {
       try {
-        const response = await register(userData);
-        //submit users token to jwt utility
-        console.log(response.token)
-        setToken(response.token);
-        //redirect user to success page
+        await updateUserById(userData);
       } catch (error) {
         console.log(error);
       }
       //if api post works, redirect to success page
-      navigate("/register/success");
+     navigate("/");
     }
   };
 
@@ -139,6 +121,17 @@ function Register(props) {
           </Grid>
           <Grid item xs={8}>
             <label>
+              Bio:
+              <input
+                type="text"
+                name="bio"
+                value={userData.bio}
+                onChange={handleChange}
+              />
+            </label>
+          </Grid>
+          <Grid item xs={8}>
+            <label>
               Zip Code:
               <input
                 type="text"
@@ -159,7 +152,7 @@ function Register(props) {
               />
             </label>
           </Grid>
-          <input type="submit" value="Register" />
+          <input type="submit" value="Update Account" />
         </form>
         <Grid item xs={8}>
           {validationErrorArray.map((e) => {
@@ -171,4 +164,4 @@ function Register(props) {
   );
 }
 
-export default Register;
+export default AccountSettings;

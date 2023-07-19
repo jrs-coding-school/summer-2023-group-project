@@ -138,5 +138,19 @@
     "points": 0,
     "role": "user",
     "createdAt": "3/23/2023"
+  },
+  {
+    "id": 11,
+    "username": "admin",
+    "email": "admin@google.com",
+    "password": "$2b$10$h3kHDKGOneefPxY5nsDRG.4I2FWnXNJ2kMYwuGr494K0Hy3IZOCIW",
+    "firstname": "Admin",
+    "lastname": "Admin",
+    "zipcode": 29401,
+    "bio": "This is a bio.",
+    "avatar": "MaurisSit.png",
+    "points": 0,
+    "role": "admin",
+    "createdAt": "3/23/2023"
   }
 ]
