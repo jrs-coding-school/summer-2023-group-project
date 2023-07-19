@@ -22,7 +22,6 @@ function Home(props) {
     if (isUserLoggedIn()) {
       const fetchData = async () => {
         const user = await getMe()
-        console.log("user: ", user)
         const coords = await getCoords(user.zipcode)
         console.log("coords: ", coords)
         console.log(
@@ -50,7 +49,6 @@ function Home(props) {
   }, [])
 
   const handleBoundsChanged = (e) => {
-    console.log(e)
     setCoords(e.center)
     setZoom(e.zoom)
   }
@@ -80,6 +78,7 @@ function Home(props) {
   }
 
   console.log("coords state: ", coords)
+
   return (
     <Paper>
       <TextField

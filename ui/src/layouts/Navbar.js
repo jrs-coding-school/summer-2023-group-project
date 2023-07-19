@@ -1,93 +1,60 @@
-import { Paper } from '@mui/material';
-import React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import { styled, alpha } from '@mui/material/styles';
-import InputBase from '@mui/material/InputBase';
-import SearchIcon from '@mui/icons-material/Search';
+
+import { useEffect, useState } from "react
 import { Link } from 'react-router-dom';
-import { blue } from '@mui/material/colors';
-import {getToken, isUserLoggedIn, setToken, clearToken} from '../utility/utils'
+import {Paper, AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from "@mui/material";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import { getToken, isUserLoggedIn, setToken, clearToken } from "../utility/utils";
+import { getMe } from "../utility/api";
 
 //settings for the profile dropdown
-const settings = ['Profile', 'Account', 'Logout'];
-function Logout() {
-	clearToken();
-	window.location.reload(false);
-}
 function Navbar() {
+
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
 	const [anchorElUser, setAnchorElUser] = React.useState(null);
-	const [anchorElSearch, setAnchorElSearch] = React.useState(null);
+  const [myData, setMyData] = useState({});
+  const settings = ["Profile", "Account", "Logout"];
 
-	const handleOpenNavMenu = (event) => {
-		setAnchorElNav(event.currentTarget);
-	};
-	const handleOpenUserMenu = (event) => {
-		setAnchorElUser(event.currentTarget);
-	};
+  useEffect(() => {
+    if (isUserLoggedIn()) {
+      const getMyData = async () => {
+        const me = await getMe();
+        setMyData(me);
+      };
+      getMyData();
+    }
+  }, []);
 
-	const handleCloseNavMenu = () => {
-		setAnchorElNav(null);
-	};
+  const isUserAdmin = () => {
+    if (myData.role === "admin") {
+      return true
+    }
+		return false
+  };
 
-	const handleCloseUserMenu = () => {
-		setAnchorElUser(null);
-	};
+  function Logout() {
+    clearToken();
+    window.location.reload(false);
+  }
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
 
-	const StyledInputBase = styled(InputBase)(({ theme }) => ({
-		color: 'inherit',
-		'& .MuiInputBase-input': {
-		  padding: theme.spacing(1, 1, 1, 0),
-		  // vertical padding + font size from searchIcon
-		  paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-		  transition: theme.transitions.create('width'),
-		  width: '100%',
-		  [theme.breakpoints.up('md')]: {
-			width: '20ch',
-		  },
-		},
-	  }));
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
 
-	  const Search = styled('div')(({ theme }) => ({
-		position: 'relative',
-		borderRadius: theme.shape.borderRadius,
-		backgroundColor: alpha(theme.palette.common.white, 0.15),
-		'&:hover': {
-		  backgroundColor: alpha(theme.palette.common.white, 0.25),
-		},
-		marginRight: theme.spacing(2),
-		marginLeft: 0,
-		width: '100%',
-		[theme.breakpoints.up('sm')]: {
-		  marginLeft: theme.spacing(3),
-		  width: 'auto',
-		},
-	  }));
-	   
-	  const SearchIconWrapper = styled('div')(({ theme }) => ({
-		padding: theme.spacing(0, 2),
-		height: '100%',
-		position: 'absolute',
-		pointerEvents: 'none',
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-	  }));
-	  
-	  
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  if (!myData) {
+    return <div>loading...</div>;
+  }
+
 	return (
 		<Paper>
 			<AppBar position="static">
@@ -149,17 +116,6 @@ function Navbar() {
 								textDecoration: "none",
 								color: "white",
 							}}>
-							<Link to="/reports/search">
-								<Search>
-									<SearchIconWrapper>
-										<SearchIcon />
-									</SearchIconWrapper>
-									<StyledInputBase
-									placeholder="Search…"
-									inputProps={{ "aria-label": "search" }}
-									/>
-								</Search>
-							</Link>
 							<Link
 								to="/reports"
 								style={{ textDecoration: "none" }}>

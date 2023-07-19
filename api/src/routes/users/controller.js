@@ -3,33 +3,59 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const {
-  findById,
-  findAll,
-  createUser,
-  findByUsername,
-  modifyUser,
-} = require("./service");
+const { findById, findAll, createUser, findByUsername, destroyUser,  modifyUser } = require('./service')
 
 exports.showAll = async (req, res) => {
   try {
-    console.log("auth req.user: ", req.user);
 
     // Only allow admins to access the user list
-    if (!user || user.role !== "admin") {
-      return res
-        .status(403)
-        .json({ error: "You do not have permission to access this resource" });
+    if (!req.user || req.user.role !== 'admin') {
+      return res.status(403).json({ error: 'You do not have permission to access this resource' })
     }
 
-    const allUsers = await findAll();
-    console.log("allUsers: ", allUsers);
-    return res.json(allUsers);
+    const allUsers = await findAll()
+    return res.json(allUsers)
   } catch (error) {
     console.log(error);
     return res.status(500).json();
   }
 };
+
+exports.deleteUser = async (req, res) => {
+  const userId = req.params.id
+  try {
+    // Only allow admins to access the user list
+    if (!req.user || req.user.role !== 'admin') {
+      return res.status(403).json({ error: 'You do not have permission to access this resource' })
+    }
+
+    const deletedUser = await destroyUser(userId)
+    return res.json(deletedUser)
+
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json()
+  }
+}
+
+exports.updateUser = async (req, res) => {
+  const userId = req.body.id
+  const userData = req.body
+  console.log(userData)
+  try {
+    // Only allow admins to access the user list
+    if (!req.user || req.user.role !== 'admin') {
+      return res.status(403).json({ error: 'You do not have permission to access this resource' })
+    }
+
+    const updatedUser =  await modifyUser(userData, userId)
+    return res.json(updatedUser)
+
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json()
+  }
+}
 
 exports.showMe = async (req, res) => {
   try {
@@ -61,9 +87,6 @@ exports.showById = async (req, res) => {
     console.log("auth req.user: ", req.user);
     //get the authenticated user using the userId provided from authentication
     const user = await findById(req.user.id);
-
-    console.log("user: ", user);
-
     // Only allow admins and account owners to access the user data
     if (!user || (user.id != req.params.id && user.role !== "admin")) {
       return res
@@ -72,7 +95,6 @@ exports.showById = async (req, res) => {
     }
 
     const foundUser = await findById(req.params.id);
-
     console.log(foundUser);
     if (!foundUser) {
       return res.status(404).json("No User Found");

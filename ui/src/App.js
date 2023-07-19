@@ -7,6 +7,7 @@ import ThemeContextProvider from './context/themeContext'
 import Register from './views/Register'
 import Login from './views/Login'
 import Success from './views/Register/success'
+import AdminPanel from './views/AdminPanel'
 import AccountSettings from './views/AccountSettings'
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
             <Route path="/register/success" element={<Success/>}/>
             <Route path="/account/settings" element={<AccountSettings/>}/>
             <Route path="/login" element={<Login/>}/>
+            <Route path="/adminpanel" element={<AdminPanel/>}/>
             <Route path="*" element={<NotFound/>}/>
           </Route>
         </Routes>
