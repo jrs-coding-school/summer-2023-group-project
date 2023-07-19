@@ -1,5 +1,9 @@
 const knex = require('../../knex.js')
 
+exports.findReportById = async (id) => {
+  const results = await knex('reports').select("*").where('id', id)
+  return results
+}
 
 //selects all reports from the reports table
 exports.findAllReports = async () => {
@@ -18,4 +22,3 @@ exports.findAllReports = async () => {
   
     return countyReports
   }
-  

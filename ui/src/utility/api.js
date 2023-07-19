@@ -215,3 +215,32 @@ export const getLocationByAddress = async (search) => {
 
   return responseData
 }
+  
+export const getReportById = async(id) => {
+
+  const response = await fetch(`${baseUrl}/reports/${id}`, {
+    method: "GET",
+  })
+
+  const responseData = await response.json()
+  if (!response.ok) {
+    throw new Error(`Status Code: ${response?.status} - ${responseData?.message}`)
+  }
+
+  return responseData
+}
+
+export const getCrimeById = async(id) => {
+
+  const response = await fetch(`${baseUrl}/crimes/${id}`, {
+    method: "GET",
+  })
+
+  const responseData = await response.json()
+  
+  if (!response.ok) {
+    throw new Error(`Status Code: ${response?.status} - ${responseData?.message}`)
+  }
+
+  return responseData
+}
