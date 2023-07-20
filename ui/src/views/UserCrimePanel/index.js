@@ -1,57 +1,52 @@
 import { useEffect, useState, useCallback } from "react";
-import { getMe, deleteUserReport, updateUserReports } from "../../utility/api";
+import { getMe, getReportByUserId, deleteUserReport, updateUserReports } from "../../utility/api";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button } from "@mui/material";
 
 function UserCrimePanel(props) {
-  const [users, setUsers] = useState();
+  const [report, setReport] = useState();
   const [idsToDelete, setIdsToDelete] = useState();
 
   const columns = [
-    { field: "id", headerName: "ID", width: 70, editable: true },
+    { field: "reportId", headerName: "Reports", width: 70, editable: false },
     {
-      field: "firstname",
-      headerName: "First name",
+      field: "address",
+      headerName: "Address",
       width: 130,
       editable: true,
     },
-    { field: "lastname", headerName: "Last name", width: 130, editable: true },
-    { field: "username", headerName: "Username", width: 130, editable: true },
-    { field: "email", headerName: "Email", width: 130, editable: true },
-    { field: "zipcode", headerName: "Zip Code", width: 130, editable: true },
+    { field: "zipcode", headerName: "Zipcode", width: 130, editable: true },
+    { field: "city", headerName: "City", width: 130, editable: true },
+    { field: "county", headerName: "County", width: 130, editable: true },
+    { field: "state", headerName: "State", width: 130, editable: true },
     {
-      field: "points",
-      headerName: "Snitch Points",
+      field: "description",
+      headerName: "Description",
       width: 130,
       editable: true,
     },
-    {
-      field: "createdAt",
-      headerName: "Date Created",
-      width: 130,
-      editable: true,
-    },
-    { field: "role", headerName: "Role", width: 130, editable: true },
+    { field: "is ongoing", headerName: "Is Ongoing?", width: 130, editable: true },
   ];
 
-  const rows = users;
+  const rows = report;
 
   useEffect(() => {
-    const getLoggedInUserData = async () => {
-      const usersData = await getMe();
-      setUsers(usersData);
+    const getUserReportData= async () => {
+        const userData = await getMe();
+        const userId = await userData[0].id
+        const reportData = await getReportByUserId(userId);
+      setReport(reportData);
     };
-    getLoggedInUserData();
+    getUserReportData();
   }, []);
-
   const handleDeleteUserReports = async () => {
-    
-    Promise.allSettled(idsToDelete.map(async (userId) => {
-      return await deleteUserReport(userId)
+  
+    Promise.allSettled(idsToDelete.map(async (id) => {
+      return await deleteUserReport(id)
     }))
     .then(async () => {
-      const usersData = await getLoggedInUserData();
-      setUsers(usersData);
+      const reportData = await getUserReportData();
+      setReport(reportData);
     });  
   };
 
@@ -59,7 +54,7 @@ function UserCrimePanel(props) {
     return await updateUserReports(updatedRow);
   }, []);
 
-  if (!users) {
+  if (!report) {
     return <div>Loading...</div>;
   }
   return (
