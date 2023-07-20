@@ -10,6 +10,7 @@ import Success from './views/Register/success'
 import ReportDetails from './views/ReportDetails'
 import AdminPanel from './views/AdminPanel'
 import AccountSettings from './views/AccountSettings'
+import UserCrimePanel from './views/UserCrimePanel'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/account/settings" element={<AccountSettings/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/adminpanel" element={<AdminPanel/>}/>
+            <Route path="/userpanel" element={<UserCrimePanel/>}/>
             <Route path="*" element={<NotFound/>}/>
           </Route>
         </Routes>

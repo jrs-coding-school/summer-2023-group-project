@@ -5,6 +5,11 @@ exports.findReportById = async (id) => {
   return results
 }
 
+exports.findReportByUserId = async (userId) => {
+  const results = await knex('reports').select("*").where('userId', userId)
+  return results
+}
+
 //selects all reports from the reports table
 exports.findAllReports = async () => {
     const reports = await knex('reports').select("*")
@@ -22,3 +27,14 @@ exports.findAllReports = async () => {
   
     return countyReports
   }
+
+  exports.modifyUserReports = async (reportData, id) => {
+    // Insert the user into the database and return
+    console.log(reportData)
+    return await knex('reports').update(reportData).where('id', id) // return the data you need 
+  }
+
+  exports.destroyUserReport = async (id) => {
+    const deletedUserReport = await knex("reports").delete().where("id", id);
+    return deletedUserReport;
+  };
