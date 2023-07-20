@@ -119,9 +119,18 @@ export const createNewReport = async (reportData) => {
   }
 };
 
-//Get Lat and Lon from Address
-export const getCoordsByAddress = async (address, city, zip) => {
-  const response = await fetch(`https://geocode.maps.co/search?q=${address}`, {
+
+export const getZipByCoords = async (lat, lon) => {
+  const response = await fetch(`https://geocode.maps.co/reverse?lat=${lat}&lon=${lon}`, {
+    method: "GET",
+  });
+  const responseData = await response.json()
+  console.log(responseData)
+  return responseData.address.postcode;
+};
+
+export const getCoordsByAddress = async (address, city, state) => {
+  const response = await fetch(`https://geocode.maps.co/search?q=${address}${city}${state}`, {
     method: "GET",
   });
   const responseData = await response.json()

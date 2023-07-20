@@ -53,7 +53,7 @@ function Navbar() {
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             {/* linked the iWitness text to the homepage */}
-            <Link to="/home" style={{ textDecoration: "none", color: "white" }}>
+            <Link to="/" style={{ textDecoration: "none", color: "white" }}>
               <Typography
                 variant="h6"
                 noWrap
@@ -100,7 +100,7 @@ function Navbar() {
                   }}
                 />
               </Link>
-              <Link to="/report" style={{ textDecoration: "none" }}>
+              <Link to="/reports/new" style={{ textDecoration: "none" }}>
                 <Button
                   sx={{
                     // display: { xs: 'none', md: 'flex' },
