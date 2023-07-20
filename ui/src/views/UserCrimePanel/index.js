@@ -8,7 +8,7 @@ function UserCrimePanel(props) {
   const [idsToDelete, setIdsToDelete] = useState();
 
   const columns = [
-    { field: "reportId", headerName: "Reports", width: 70, editable: false },
+    { field: "id", headerName: "Reports", width: 70, editable: false },
     {
       field: "address",
       headerName: "Address",
@@ -25,7 +25,7 @@ function UserCrimePanel(props) {
       width: 130,
       editable: true,
     },
-    { field: "is ongoing", headerName: "Is Ongoing?", width: 130, editable: true },
+    { field: "isOngoing", headerName: "Is Ongoing?", width: 130, editable: true },
   ];
 
   const rows = report;
@@ -33,8 +33,10 @@ function UserCrimePanel(props) {
   useEffect(() => {
     const getUserReportData= async () => {
         const userData = await getMe();
-        const userId = await userData[0].id
+        const userId = await userData.id
         const reportData = await getReportByUserId(userId);
+        //reportData is an empty array
+        console.log('report data: ', reportData)
       setReport(reportData);
     };
     getUserReportData();
