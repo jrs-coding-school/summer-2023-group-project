@@ -1,8 +1,8 @@
-import { Grid, Typography } from "@mui/material";
-import { updateUserById } from "../../utility/api";
-import { getToken } from "../../utility/utils";
+import { Button, Grid, Stack, Typography } from "@mui/material";
+import { updateUserById, deleteMe, getMe } from "../../utility/api";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { clearToken, getToken } from "../../utility/utils";
 
 function AccountSettings(props) {
   const [userData, setUserdata] = useState({
@@ -47,6 +47,13 @@ function AccountSettings(props) {
     }
   };
 
+  const deleteAccount = async () =>{
+    const me = await getMe()
+    deleteMe(me.id)
+    clearToken(getToken())
+    navigate('/')
+  }
+x
   const handleSubmit = async (event) => {
     // prevents the submit button from refreshing the page
     event.preventDefault();
@@ -152,7 +159,10 @@ function AccountSettings(props) {
               />
             </label>
           </Grid>
-          <input type="submit" value="Update Account" />
+          <Stack>
+          <Button type="submit" value="Update Account">Update Account</Button>
+          <Button onClick={deleteAccount}>Delete Account</Button>
+          </Stack>
         </form>
         <Grid item xs={8}>
           {validationErrorArray.map((e) => {

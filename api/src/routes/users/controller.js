@@ -38,6 +38,20 @@ exports.deleteUser = async (req, res) => {
   }
 }
 
+exports.deleteMe = async (req, res) => {
+  const userId = req.params.id
+  try {
+    // Only allow admins to access the user list
+
+    const deletedUser = await destroyUser(userId)
+    return res.json(deletedUser)
+
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json()
+  }
+}
+
 exports.updateUser = async (req, res) => {
   const userId = req.body.id
   const userData = req.body
