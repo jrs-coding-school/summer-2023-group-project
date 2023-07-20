@@ -102,10 +102,11 @@ function Home(props) {
         {!reports ? null : reports.map((report) => {
           console.log("report: ", report)
           return (
-            <Marker width={50} anchor={[report.lat, report.lon]} />
+            <Marker width={35} anchor={[1*(report.lat), 1*(report.lon)]}
+             />
           )
         })}
-        <Marker width={50} anchor={[32.7765, -79.9311]} />
+        <Marker width={25} anchor={[32.7765, -79.9311]} />
         <ZoomControl />
       </Map>
     </Paper>
