@@ -11,7 +11,7 @@ const router = new Router()
 
 router.get('/', showAllReports)
 router.get('/:id', showReportById)
-router.get('/:userId', showReportByUserId)
+router.get('/userid/:userId', showReportByUserId)
 router.get('/county/:county', showCountyReports)
 router.put('/update/', authenticate, updateUserReports )
 router.delete('/delete/:id', authenticate, deleteUserReport)

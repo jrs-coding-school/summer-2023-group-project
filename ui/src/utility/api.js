@@ -289,7 +289,7 @@ export const getCrimeById = async(id) => {
 }
 export const getReportByUserId = async(userId) => {
 
-  const response = await fetch(`${baseUrl}/reports/${userId}`, {
+  const response = await fetch(`${baseUrl}/reports/userid/${userId}`, {
     method: "GET",
   })
 
