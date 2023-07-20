@@ -8,7 +8,7 @@ function UserCrimePanel(props) {
   const [idsToDelete, setIdsToDelete] = useState();
 
   const columns = [
-    { field: "id", headerName: "Reports", width: 70, editable: false },
+    { field: "id", headerName: "Report ID", width: 100, editable: false },
     {
       field: "address",
       headerName: "Address",
@@ -47,7 +47,7 @@ function UserCrimePanel(props) {
       return await deleteUserReport(id)
     }))
     .then(async () => {
-      const reportData = await getUserReportData();
+      const reportData = await getReportByUserId();
       setReport(reportData);
     });  
   };
