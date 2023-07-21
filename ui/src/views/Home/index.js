@@ -1,13 +1,13 @@
-import { Map, Marker, ZoomControl } from "pigeon-maps"
+import { Map, Marker, ZoomControl, Overlay } from "pigeon-maps"
 import { isUserLoggedIn } from "../../utility/utils"
-import { useEffect, useState } from "react"
+import { Fragment, useEffect, useState } from "react"
 import {
   getMe,
   getCoords,
   getReportsByCounty,
   getLocationByAddress,
 } from "../../utility/api"
-import { TextField, Button, Paper } from "@mui/material"
+import { TextField, Button, Paper} from "@mui/material"
 import SearchIcon from "@mui/icons-material/Search"
 
 function Home(props) {
@@ -77,7 +77,43 @@ function Home(props) {
     setReports(foundReports)
   }
 
-  console.log("coords state: ", coords)
+
+
+  const handleTooltip = async (report) => {
+    
+    
+    const children = {
+      address : report.payload.address,
+      zipcode : report.payload.zipcode,
+      description : report.payload.description,
+      date : report.payload.datetime,
+      id : report.payload.id
+    }
+console.log(children)
+    return (
+      <Fragment>
+        {children}
+      </Fragment>
+      )
+      
+    
+
+    
+  
+    
+  }
+  console.log("coords state:", coords)
+  
+const MarkerTooltip = (report) => (
+  <Fragment>
+  <Overlay width={25} anchor={[parseFloat(report.lat), parseFloat(report.lon)]} >
+   </Overlay>
+   <Marker anchor={[parseFloat(report.lat), parseFloat(report.lon)]} offset={[0,0]}>
+      </Marker>
+   </Fragment>
+
+)
+
 
   return (
     <Paper>
@@ -99,13 +135,12 @@ function Home(props) {
         zoom={zoom}
         onBoundsChanged={(e) => handleBoundsChanged(e)}
       >
-        {!reports ? null : reports.map((report) => {
+         {!reports ? null : reports.map((report) => {
           console.log("report: ", report)
           return (
-            <Marker width={35} anchor={[1*(report.lat), 1*(report.lon)]}
-             />
-          )
-        })}
+        <MarkerTooltip anchor={[parseFloat(report.lat), parseFloat(report.lon)]}/>
+        )
+      })}
         <Marker width={25} anchor={[32.7765, -79.9311]} />
         <ZoomControl />
       </Map>
