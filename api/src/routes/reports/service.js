@@ -16,8 +16,25 @@ exports.findAllReports = async () => {
   exports.findReportsByCounty = async (county) => {
     console.log("county:", county)
     const countyReports = await knex('reports')
-      .select("*")
+      .select('reports.id', 
+        'reports.userId', 
+        'reports.address', 
+        'reports.zipcode', 
+        'reports.city', 
+        'reports.county', 
+        'reports.state', 
+        'reports.lat',
+        'reports.lon',
+        'reports.description',
+        'reports.isOngoing',
+        'reports.datetime',
+        'crimes.subtype',
+        'crimes.type',
+        'crimes.points'
+      )
       .where('county', county.trimStart())
+      .innerJoin('crimes', 'crimes.id', '=', 'reports.crimeId')
+    
     console.log('countyReports: ', countyReports)
   
     return countyReports
