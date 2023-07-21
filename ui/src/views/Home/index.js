@@ -90,7 +90,13 @@ function Home(props) {
         center={!coords ? [39.5, -98.35] : coords}
         zoom={zoom}
         onBoundsChanged={(e) => handleBoundsChanged(e)}
-        onClick={() => setOpen(null)}
+        onClick={({event, latLng, pixel}) => {
+          console.log(event)
+          // prevent closing marker if the map is not clicked
+          if (event.target.className === "pigeon-overlays") {
+            setOpen(null)
+          }
+        }}
       >
         {!reports
           ? null
