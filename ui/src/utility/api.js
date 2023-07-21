@@ -247,6 +247,50 @@ export const getAllCrimes = async () => {
   return responseData
 }
 
+export const updateUserReports = async(data) => {
+  console.log(data)
+  const token = getToken()
+  const response = await fetch(`${baseUrl}/reports/update/${data.id}`, {
+    method: "PUT", 
+    headers: new Headers({
+      "Authorization": `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }),
+    body: JSON.stringify(data),
+  })
+
+  const responseData = await response.json()
+
+  if (!response.ok) {
+    throw new Error(`Status Code: ${response?.status} - ${responseData?.message}`)
+  }
+
+  return responseData
+}
+
+export const deleteUserReport = async(id) => {
+
+  const token = getToken()
+  if (!token) {
+    throw new Error(`Missing User Token`)
+  }
+
+  const response = await fetch(`${baseUrl}/reports/delete/${id}`, {
+    method: "DELETE",
+    headers: new Headers({
+      "Authorization": `Bearer ${token}` //Token is required for protected Routes
+    }),
+  })
+
+  const responseData = await response.json()
+
+  if (!response.ok) {
+    throw new Error(`Status Code: ${response?.status} - ${responseData?.message}`)
+  }
+  
+  return responseData
+}
+
 export const getMe = async() => {
 
   const token = getToken()
@@ -340,3 +384,16 @@ export const getCrimeById = async(id) => {
   return responseData
 }
 
+export const getReportByUserId = async(userId) => {
+
+  const response = await fetch(`${baseUrl}/reports/userid/${userId}`, {
+    method: "GET",
+  })
+
+  const responseData = await response.json()
+  if (!response.ok) {
+    throw new Error(`Status Code: ${response?.status} - ${responseData?.message}`)
+  }
+
+  return responseData
+}

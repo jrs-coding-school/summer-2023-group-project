@@ -1,7 +1,12 @@
 const knex = require('../../knex.js')
 
 exports.findReportById = async (id) => {
-  const results = await knex('reports').select("*").where('id', id)
+  const results = await knex('reports').where('id', id).first("*")
+  return results
+}
+
+exports.findReportByUserId = async (userId) => {
+  const results = await knex('reports').select("*").where('userId', userId)
   return results
 }
 
@@ -27,3 +32,14 @@ exports.findAllReports = async () => {
   
     return countyReports
   }
+
+  exports.modifyUserReports = async (reportData, id) => {
+    // Insert the user into the database and return
+    console.log(reportData)
+    return await knex('reports').update(reportData).where('id', id) // return the data you need 
+  }
+
+  exports.destroyUserReport = async (id) => {
+    const deletedUserReport = await knex("reports").delete().where("id", id);
+    return deletedUserReport;
+  };

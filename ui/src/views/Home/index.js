@@ -22,8 +22,12 @@ function Home(props) {
     if (isUserLoggedIn()) {
       const fetchData = async () => {
         const user = await getMe()
+        console.log(user.zipcode)
         const coords = await getCoords(user.zipcode)
         console.log("coords: ", coords)
+        if(coords.length === 0) {
+          return
+        }
         console.log(
           (parseFloat(coords[0].boundingbox[0]) +
             parseFloat(coords[0].boundingbox[1])) /
