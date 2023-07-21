@@ -1,7 +1,26 @@
 const knex = require('../../knex.js')
 
 exports.findReportById = async (id) => {
-  const results = await knex('reports').select("*").where('id', id)
+  const results = await knex('reports')
+  .where('reports.id', id)
+  .first('reports.id', 
+  'reports.userId', 
+  'reports.address', 
+  'reports.zipcode', 
+  'reports.city', 
+  'reports.county', 
+  'reports.state', 
+  'reports.lat',
+  'reports.lon',
+  'reports.description',
+  'reports.isOngoing',
+  'reports.datetime',
+  'crimes.subtype',
+  'crimes.type',
+  'crimes.points'
+)
+.innerJoin('crimes', 'crimes.id', '=', 'reports.crimeId')
+  
   return results
 }
 
