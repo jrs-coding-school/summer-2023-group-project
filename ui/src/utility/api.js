@@ -152,8 +152,9 @@ export const updateUser = async(data) => {
 }
 
 export const updateUserReports = async(data) => {
+  console.log(data)
   const token = getToken()
-  const response = await fetch(`${baseUrl}/reports/update/`, {
+  const response = await fetch(`${baseUrl}/reports/update/${data.id}`, {
     method: "PUT", 
     headers: new Headers({
       "Authorization": `Bearer ${token}`,

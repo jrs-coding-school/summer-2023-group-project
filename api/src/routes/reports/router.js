@@ -13,7 +13,7 @@ router.get('/', showAllReports)
 router.get('/:id', showReportById)
 router.get('/userid/:userId', showReportByUserId)
 router.get('/county/:county', showCountyReports)
-router.put('/update/', authenticate, updateUserReports )
+router.put('/update/:id', authenticate, updateUserReports )
 router.delete('/delete/:id', authenticate, deleteUserReport)
 
 // exporting router

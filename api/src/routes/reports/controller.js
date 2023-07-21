@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 
-const { findAllReports, findReportsByCounty, findReportById, findReportByUserId, modifyUserReports} = require('./service')
+const { findAllReports, findReportsByCounty, findReportById, findReportByUserId, modifyUserReports, destroyUserReport} = require('./service')
 
 exports.showReportById = async (req, res) => {
   try {
@@ -65,16 +65,19 @@ exports.showAllReports = async (req, res) => {
   }
 
   exports.updateUserReports = async (req, res) => {
-    const reportId = req.body.id
-    const reportData = req.body
-    console.log(userData)
+    const reportId = req.params.id
+    const newReportData = req.body
+    console.log("user", req.user)
     try {
-      // Only allow admins to access the user list
-      if (!req.user || req.user.role !== 'admin') {
+
+      const reportData = await findReportById(reportId)
+
+      // Only allow users to edit their own reports unless the user is an admin
+      if (req.user.id !== reportData.userId && req.user.role !== 'admin') {
         return res.status(403).json({ error: 'You do not have permission to access this resource' })
       }
   
-      const updatedUserReport =  await modifyUserReports(reportData, reportId)
+      const updatedUserReport =  await modifyUserReports(newReportData, reportId)
       return res.json(updatedUserReport)
   
     } catch (error) {
@@ -84,14 +87,17 @@ exports.showAllReports = async (req, res) => {
   }
 
   exports.deleteUserReport = async (req, res) => {
-    const userId = req.params.id
+    const reportId = req.params.id
     try {
+      console.log("reportId:", reportId)
+      const reportData = await findReportById(reportId)
+      console.log("reportData:", reportData)
       // Only allow admins to access the user list
-      if (!req.user || req.user.role !== 'admin') {
+      if (req.user.id !== reportData.userId && req.user.role !== 'admin') {
         return res.status(403).json({ error: 'You do not have permission to access this resource' })
       }
   
-      const deletedUserReport = await destroyUserReport(userId)
+      const deletedUserReport = await destroyUserReport(reportId)
       return res.json(deletedUserReport)
   
     } catch (error) {

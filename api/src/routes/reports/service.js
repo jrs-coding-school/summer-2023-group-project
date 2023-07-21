@@ -1,7 +1,7 @@
 const knex = require('../../knex.js')
 
 exports.findReportById = async (id) => {
-  const results = await knex('reports').select("*").where('id', id)
+  const results = await knex('reports').where('id', id).first("*")
   return results
 }
 

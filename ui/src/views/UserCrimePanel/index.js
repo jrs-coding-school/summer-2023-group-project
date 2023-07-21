@@ -33,7 +33,7 @@ function UserCrimePanel(props) {
   useEffect(() => {
     const getUserReportData= async () => {
         const userData = await getMe();
-        const userId = await userData.id
+        const userId = userData.id
         const reportData = await getReportByUserId(userId);
         //reportData is an empty array
         console.log('report data: ', reportData)
@@ -41,15 +41,18 @@ function UserCrimePanel(props) {
     };
     getUserReportData();
   }, []);
+
   const handleDeleteUserReports = async () => {
   
     Promise.allSettled(idsToDelete.map(async (id) => {
       return await deleteUserReport(id)
     }))
     .then(async () => {
-      const reportData = await getReportByUserId();
+      const userData = await getMe();
+      const userId = userData.id
+      const reportData = await getReportByUserId(userId);
       setReport(reportData);
-    });  
+    }); 
   };
 
   const processRowUpdate = useCallback(async (updatedRow) => {
