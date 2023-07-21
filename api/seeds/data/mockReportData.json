@@ -16,7 +16,7 @@
   },
   {
     "id": 2,
-    "userId": 2,
+    "userId": 1,
     "address": "56 Bull St",
     "zipcode": "29401",
     "city": "Charleston",
@@ -76,7 +76,7 @@
   },
   {
     "id": 6,
-    "userId": 6,
+    "userId": 1,
     "address": "408 Sumter St",
     "zipcode": "29403",
     "city": "Charleston",

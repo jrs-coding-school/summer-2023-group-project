@@ -5,8 +5,6 @@ import { useParams } from "react-router-dom";
 
 function ReportDetails(props) {
   const [reportDetails, setReportDetails] = useState();
-
-  // hardcoding id to 1, should get id from map tooltip
   const params = useParams();
   const reportId = params.id;
   console.log("reportId: ", reportId)
