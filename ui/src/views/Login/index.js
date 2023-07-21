@@ -26,6 +26,8 @@ function Login(props) {
       navigate("/");
       //submit users token to jwt utility
       //redirect user to success page
+
+      window.location.reload() // temp fix to rerender navbar
     } catch (error) {
       setLoginError(error);
     }

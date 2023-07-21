@@ -9,6 +9,8 @@ import Login from './views/Login'
 import Success from './views/Register/success'
 import ReportDetails from './views/ReportDetails'
 import ReportCrime from './views/ReportCrime'
+import AdminPanel from './views/AdminPanel'
+import AccountSettings from './views/AccountSettings'
 
 function App() {
   return (
@@ -22,7 +24,9 @@ function App() {
             <Route path="/register/success" element={<Success/>}/>
             <Route path="/reports/:id" element={<ReportDetails/>}/>
             <Route path="/reports/new" element={<ReportCrime/>}/>
+            <Route path="/account/settings" element={<AccountSettings/>}/>
             <Route path="/login" element={<Login/>}/>
+            <Route path="/adminpanel" element={<AdminPanel/>}/>
             <Route path="*" element={<NotFound/>}/>
           </Route>
         </Routes>

@@ -1,7 +1,6 @@
 require('dotenv').config()
 
-const { findReportById, addNewReport } = require('./service')
-
+const { findAllReports, findReportsByCounty, findReportById, addNewReport } = require('./service')
 
 exports.showReportById = async (req, res) => {
   try {
@@ -20,6 +19,7 @@ exports.showReportById = async (req, res) => {
   }
 
 }
+
 exports.createNewReport = async (req, res) => {
   try {
 
@@ -38,5 +38,27 @@ exports.createNewReport = async (req, res) => {
 
 }
 
-
-
+exports.showAllReports = async (req, res) => {
+    try {
+      const allReports = await findAllReports(req.params)
+      console.log('allReports: ', allReports)
+      return res.json(allReports)
+  
+    } catch (error) {
+      console.log(error)
+      return res.status(500).json()
+    }
+  }
+  
+  exports.showCountyReports = async (req, res) => {
+    console.log(req.params.county)
+    try {
+      const countyReports = await findReportsByCounty(req.params.county)
+      console.log('countyReports: ', countyReports)
+      return res.json(countyReports)
+  
+    } catch (error) {
+      console.log(error)
+      return res.status(500).json()
+    }
+  }

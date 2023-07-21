@@ -46,8 +46,9 @@ export const login = async (data) => {
  * @returns {Promise<Object>} - A promise that resolves with the user's data.
  * @throws {Error} - Throws an error if there was an issue with the login request.
  */
-export const register = async (data) => {
-  console.log(data);
+
+export const register = async(data) => {
+
   const response = await fetch(`${baseUrl}/users/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -62,8 +63,31 @@ export const register = async (data) => {
     );
   }
 
-  return responseData;
-};
+  return responseData
+}
+
+export const updateUserById = async(data) => {
+  const token = getToken()
+  const response = await fetch(`${baseUrl}/users/update/me`, {
+    method: "PUT", 
+    headers: new Headers({
+      "Authorization": `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }),
+    body: JSON.stringify(data),
+  })
+
+  const responseData = await response.json()
+
+  if (!response.ok) {
+    throw new Error(`Status Code: ${response?.status} - ${responseData?.message}`)
+  }
+
+  return responseData
+}
+
+export const getAllUsers = async(data) => {
+
 
 export const getAllUsers = async (data) => {
   const token = getToken();
@@ -99,6 +123,49 @@ export const getReportById = async (id) => {
     throw new Error(
       `Status Code: ${response?.status} - ${responseData?.message}`
     );
+  }
+  
+  return responseData
+}
+
+export const deleteUser = async(id) => {
+
+  const token = getToken()
+  if (!token) {
+    throw new Error(`Missing User Token`)
+  }
+
+  const response = await fetch(`${baseUrl}/users/delete/${id}`, {
+    method: "DELETE",
+    headers: new Headers({
+      "Authorization": `Bearer ${token}` //Token is required for protected Routes
+    }),
+  })
+
+  const responseData = await response.json()
+
+  if (!response.ok) {
+    throw new Error(`Status Code: ${response?.status} - ${responseData?.message}`)
+  }
+  
+  return responseData
+}
+
+export const updateUser = async(data) => {
+  const token = getToken()
+  const response = await fetch(`${baseUrl}/users/update/`, {
+    method: "PUT", 
+    headers: new Headers({
+      "Authorization": `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }),
+    body: JSON.stringify(data),
+  })
+
+  const responseData = await response.json()
+
+  if (!response.ok) {
+    throw new Error(`Status Code: ${response?.status} - ${responseData?.message}`)
   }
 
   return responseData;
@@ -172,6 +239,7 @@ export const getMe = async() => {
     }),
   })
 
+  
   const responseData = await response.json()
 
   if (!response.ok) {
@@ -193,3 +261,61 @@ export const getCoords = async (zipcode) => {
 
   return responseData
 }
+
+export const getReportsByCounty = async (county) => {
+
+  const response = await fetch(`${baseUrl}/reports/county/${county}`, {
+    method: "GET",
+  })
+
+  const responseData = await response.json()
+
+  if (!response.ok) {
+    throw new Error(`Status Code: ${response?.status} - ${responseData?.message}`)
+  }
+
+  return responseData
+}
+
+export const getLocationByAddress = async (search) => {
+
+  const response = await fetch(`https://geocode.maps.co/search?q=${search}&country=USA`)
+
+  const responseData = await response.json()
+
+  if (!response.ok) {
+    throw new Error(`failed to get coords`)
+  }
+
+  return responseData
+}
+  
+export const getReportById = async(id) => {
+
+  const response = await fetch(`${baseUrl}/reports/${id}`, {
+    method: "GET",
+  })
+
+  const responseData = await response.json()
+  if (!response.ok) {
+    throw new Error(`Status Code: ${response?.status} - ${responseData?.message}`)
+  }
+
+  return responseData
+}
+
+export const getCrimeById = async(id) => {
+
+  const response = await fetch(`${baseUrl}/crimes/${id}`, {
+    method: "GET",
+  })
+
+  const responseData = await response.json()
+  
+  if (!response.ok) {
+    throw new Error(`Status Code: ${response?.status} - ${responseData?.message}`)
+  }
+
+  return responseData
+}
+
