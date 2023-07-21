@@ -53,7 +53,7 @@ function AccountSettings(props) {
     clearToken(getToken())
     navigate('/')
   }
-x
+
   const handleSubmit = async (event) => {
     // prevents the submit button from refreshing the page
     event.preventDefault();
