@@ -7,7 +7,7 @@ function ReportDetails(props) {
   const [reportDetails, setReportDetails] = useState();
   const [crimeDetails, setCrimeDetails] = useState();
   console.log(reportDetails[0].isOngoing);
-  // hardcoding id to 1, should get id from map tooltip
+  
   const params = useParams();
   const reportId = params.id;
 

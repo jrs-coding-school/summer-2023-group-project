@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const { showAllReports, showCountyReports, showReportById, showReportByUserId, updateUserReports, deleteUserReport } = require('./controller')
+const { createNewReport, showAllReports, showCountyReports, showReportById, showReportByUserId, updateUserReports, deleteUserReport } = require('./controller')
 
 //import middleware
 const { authenticate } = require('../../middleware/auth')
@@ -8,7 +8,8 @@ const { authenticate } = require('../../middleware/auth')
 const router = new Router()
 
 // define routes
-
+router.get('/:id', showReportById)
+router.post('/new', createNewReport)
 router.get('/', showAllReports)
 router.get('/:id', showReportById)
 router.get('/userid/:userId', showReportByUserId)

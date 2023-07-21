@@ -1,7 +1,6 @@
 require('dotenv').config()
 
-
-const { findAllReports, findReportsByCounty, findReportById, findReportByUserId, modifyUserReports, destroyUserReport} = require('./service')
+const { findAllReports, findReportsByCounty, findReportById, addNewReport, findReportByUserId, modifyUserReports, destroyUserReport} = require('./service')
 
 exports.showReportById = async (req, res) => {
   try {
@@ -32,12 +31,17 @@ exports.showReportByUserId = async (req, res) => {
     }
     
     return res.json(foundReport)
+exports.createNewReport = async (req, res) => {
+  try {
+
+    const newReport = req.body
+    // Only allow admins and account owners to access the user data
+    const report = await addNewReport(newReport)
+    return res.json(report)
   } catch (error) {
     console.log(error)
     return res.status(500).json()
   }
-
-}
 
 exports.showAllReports = async (req, res) => {
     try {
@@ -105,4 +109,3 @@ exports.showAllReports = async (req, res) => {
       return res.status(500).json()
     }
   }
-  
