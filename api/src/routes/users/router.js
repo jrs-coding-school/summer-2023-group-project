@@ -16,8 +16,9 @@ router.post('/register', register)
 router.post('/login', login)
 router.put('/update/me', authenticate, updateUserById)
 router.put('/update/', authenticate, updateUser)
+router.delete('/delete/me', authenticate, deleteMe)
 router.delete('/delete/:id', authenticate, deleteUser)
-router.delete('/delete/me/:id', authenticate, deleteMe)
+
 
 // exporting router
 module.exports = router

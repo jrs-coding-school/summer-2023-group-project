@@ -48,10 +48,14 @@ function AccountSettings(props) {
   };
 
   const deleteAccount = async () =>{
-    const me = await getMe()
-    deleteMe(me.id)
-    clearToken(getToken())
-    navigate('/')
+    try {
+      await deleteMe()
+      // add a notification for a user here
+      clearToken(getToken())
+      navigate('/')
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const handleSubmit = async (event) => {

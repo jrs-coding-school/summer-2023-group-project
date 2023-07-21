@@ -130,19 +130,27 @@ export const deleteUser = async(id) => {
   return responseData
 }
 
-export const deleteMe = async(id) => {
+export const deleteMe = async() => {
 
   const token = getToken()
   if (!token) {
     throw new Error(`Missing User Token`)
   }
 
-  const response = await fetch(`${baseUrl}/users/delete/me/${id}`, {
+  const response = await fetch(`${baseUrl}/users/delete/me`, {
     method: "DELETE",
     headers: new Headers({
       "Authorization": `Bearer ${token}` //Token is required for protected Routes
     }),
   })
+  
+  const responseData = await response.json()
+
+  if (!response.ok) {
+    throw new Error(`Status Code: ${response?.status} - ${responseData?.message}`)
+  }
+
+  return responseData
 }
 
 export const updateUser = async(data) => {
