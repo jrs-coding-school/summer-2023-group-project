@@ -5,6 +5,11 @@ exports.findReportById = async (id) => {
   return results
 }
 
+exports.addNewReport = async (newReport) => {
+  const createdReport = await knex('reports').insert(newReport)
+  return createdReport
+}
+
 //selects all reports from the reports table
 exports.findAllReports = async () => {
     const reports = await knex('reports').select("*")

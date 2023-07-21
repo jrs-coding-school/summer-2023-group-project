@@ -152,6 +152,46 @@ function Navbar() {
 							</Link>
 						</Box>
 
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: { xs: "flex", md: "none" },
+                alignItems: "center",
+              }}
+            >
+              <Link to="/leaderboard">
+                <EmojiEventsIcon
+                  sx={{
+                    // display: { xs: 'none', md: 'flex' },
+                    mr: 1,
+                    textDecoration: "none",
+                    color: "white",
+                  }}
+                />
+              </Link>
+              <Link to="/notfications">
+                <NotificationsIcon
+                  sx={{
+                    // display: { xs: 'none', md: 'flex' },
+                    mr: 1,
+                    textDecoration: "none",
+                    color: "white",
+                  }}
+                />
+              </Link>
+              <Link to="/reports/new" style={{ textDecoration: "none" }}>
+                <Button
+                  sx={{
+                    // display: { xs: 'none', md: 'flex' },
+                    mr: 1,
+                    textDecoration: "none",
+                    color: "white",
+                  }}
+                >
+                  Report a Crime
+                </Button>
+              </Link>
+              </Box>
 						<Box sx={{ flexGrow: 0 }}>
 							<Tooltip>
 								{/* profile avatar on far right side */}
