@@ -116,7 +116,7 @@ function Navbar() {
 								color: "white",
 							}}>
 							<Link
-								to="/reports"
+								to="/reports/new"
 								style={{ textDecoration: "none" }}>
 								<Button
 									sx={{
